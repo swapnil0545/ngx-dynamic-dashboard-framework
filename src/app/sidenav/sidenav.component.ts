@@ -11,9 +11,9 @@ import { EventService } from '../eventservice/event.service';
 })
 export class SidenavComponent implements OnInit {
   @ViewChild('drawer') public drawer!: MatDrawer;
-  @ViewChild('layout') public layout!: MatDrawer;
-  @ViewChild('toolbar') public toolbar!: MatDrawer;
+  @ViewChild('rightSideBar') public rightSideBar!: MatDrawer;
   boardData: IBoard[] = [];
+  sidebar: string = '';
 
   showFiller = false;
   constructor(
@@ -24,27 +24,24 @@ export class SidenavComponent implements OnInit {
     this.setupEventListeners();
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   toggleMenu() {
     this.drawer.toggle();
   }
 
-  toggleLayout() {
-    this.layout.toggle();
+  toggleRightBar(event: string) {
+    this.rightSideBar.toggle();
+    this.sidebar = event;
   }
-
-  toggleToolbar(){
-    this.toolbar.toggle();
-  }
-
   loadBoards() {
-    this.boardService.getBoardCollection().subscribe((boardCollection: IBoardCollection) => {
-      this.boardData = boardCollection.boardList.filter((obj) => {
-
-        return obj.relationship == Hiearchy.PARENT
+    this.boardService
+      .getBoardCollection()
+      .subscribe((boardCollection: IBoardCollection) => {
+        this.boardData = boardCollection.boardList.filter((obj) => {
+          return obj.relationship == Hiearchy.PARENT;
+        });
       });
-    });
   }
 
   showBoard(boardList: any) {
@@ -52,7 +49,6 @@ export class SidenavComponent implements OnInit {
     let boardSelected = boardList.selectedOptions.selected[0]?.value;
 
     this.eventService.emitBoardSelectedEvent({ data: boardSelected });
-
   }
 
   setupEventListeners() {
@@ -62,15 +58,13 @@ export class SidenavComponent implements OnInit {
         this.toggleMenu();
       });
 
-    this.eventService
-      .listenForBoardSideLayoutEvent().subscribe((event) => {
-        this.toggleLayout();
-      });
+    this.eventService.listenForBoardSideLayoutEvent().subscribe((event) => {
+      this.toggleRightBar('layout');
+    });
 
-    this.eventService
-      .listenForBoardSideToolbarEvent().subscribe((event) => {
-        this.toggleToolbar();
-      });
+    this.eventService.listenForBoardSideToolbarEvent().subscribe((event) => {
+      this.toggleRightBar('toolbar');
+    });
 
     this.eventService
       .listenForBoardCreatedCompleteEvent()
@@ -82,10 +76,10 @@ export class SidenavComponent implements OnInit {
       .subscribe((event) => {
         this.loadBoards();
       });
-    this.eventService.listenForBoardUpdateNameDescriptionRequestEvent().subscribe((event) => {
-
-     this.loadBoards();
-
-    });
+    this.eventService
+      .listenForBoardUpdateNameDescriptionRequestEvent()
+      .subscribe((event) => {
+        this.loadBoards();
+      });
   }
 }
