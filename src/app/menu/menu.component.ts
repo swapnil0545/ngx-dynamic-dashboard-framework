@@ -37,9 +37,10 @@ export class MenuComponent implements OnInit {
   }
 
   openGadgetLibraryDialog() {
-    this.dialog.open(LibraryComponent, {
+    this.eventService.emitBoardSideToolbarClickEvent();
+    /*this.dialog.open(LibraryComponent, {
       width: '700px',
-    });
+    });*/
   }
 
   toggleMenu() {

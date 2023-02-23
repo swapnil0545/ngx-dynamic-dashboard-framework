@@ -26,6 +26,7 @@ import { MatDialogModule } from '@angular/material/dialog';
   ],
   providers:[
     LibraryService
-  ]
+  ],
+  exports: [LibraryComponent],
 })
 export class LibraryModule { }

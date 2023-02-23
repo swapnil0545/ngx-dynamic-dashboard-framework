@@ -27,7 +27,7 @@ export class EventService {
   private gadgetDeleteSubject: Subject<IEvent> = new Subject<IEvent>();
   private userDataChangedSubject: Subject<IEvent> = new Subject<IEvent>();
   private scheduleEventDataChangedSubject: Subject<IEvent> = new Subject<IEvent>();
-
+  private sideToolbarSubject: Subject<IEvent> = new Subject<IEvent>();
 
   private subscribers: Array<Subject<string>> = [];
 
@@ -116,6 +116,14 @@ export class EventService {
 
   listenForBoardSideLayoutEvent(): Observable<IEvent> {
     return this.sideLayoutSubject.asObservable();
+  }
+
+  emitBoardSideToolbarClickEvent() {
+    this.sideToolbarSubject.next(this.emptyEvent);
+  }
+
+  listenForBoardSideToolbarEvent(): Observable<IEvent> {
+    return this.sideToolbarSubject.asObservable();
   }
 
   emitBoardGadgetPropertyChangeEvent(){
