@@ -46,8 +46,6 @@ export class BarChartComponent extends GadgetBase  implements OnInit {
       console.log.apply(this.subtitle);
     }
 
-
-
     //persist changes
     this.boardService.savePropertyPageConfigurationToDestination(
       propertiesJSON,

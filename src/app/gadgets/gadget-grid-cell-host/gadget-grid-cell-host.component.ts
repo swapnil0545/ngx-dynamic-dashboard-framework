@@ -38,6 +38,10 @@ export class GadgetGridCellHostComponent implements OnInit {
       tags: [],
       propertyPages: [],
       actions: [],
+      x:0,
+      y:0,
+      rows:0,
+      cols:0
     };
   }
 

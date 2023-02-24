@@ -1,3 +1,4 @@
+import { GridsterConfig, GridsterItemComponentInterface } from 'angular-gridster2';
 import { IGadget } from '../gadgets/common/gadget-common/gadget-base/gadget.model';
 
 export interface IBoardCollection {
@@ -12,7 +13,7 @@ export interface IBoard {
   id: number;
   relationship: Hiearchy;
   tabs: ITab[];
-  rows: IRow[];
+  gadgets: IGadget[];
 }
 
 export interface IRow {
@@ -39,3 +40,7 @@ export interface ITab {
   title: string;
   id: number;
 }
+
+export interface DashboardConfig extends GridsterConfig {}
+
+export interface DashboardItemComponentInterface extends GridsterItemComponentInterface {}

@@ -1,5 +1,7 @@
-export interface IGadget {
-  componentType: string;
+import { GridsterItem } from "angular-gridster2";
+
+export interface IGadget extends GridsterItem{
+  componentType?: any;
   title: string;
   subtitle: string;
   description: string;

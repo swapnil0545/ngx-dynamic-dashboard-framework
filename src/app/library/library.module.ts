@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { LibraryService } from './library.service';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatListModule } from '@angular/material/list';
 
 
 
@@ -22,7 +23,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatCardModule,
     MatIconModule,
     ScrollingModule,
-    MatDialogModule
+    MatDialogModule,
+    MatListModule
   ],
   providers:[
     LibraryService

@@ -64,19 +64,19 @@ export class LayoutService {
       });
     });
 
-    board.rows = [{ columns: gadgetColumnArrayList }];
+    //board.rows = [{ columns: gadgetColumnArrayList }];
     board.structure = layoutData;
     this.boardService.updateBoardDueToLayoutChange(board);
   }
   private getGadgetsAsASingleList(board: IBoard) {
     let gadgetList: IGadget[] = [];
-    board.rows.forEach((row) => {
+    /*board.rows.forEach((row) => {
       row.columns.forEach((column) => {
         column.gadgets.forEach((gadget) => {
           gadgetList.push(gadget);
         });
       });
-    });
+    });*/
     return gadgetList;
   }
 

@@ -22,6 +22,8 @@
     "@angular/router": "^14.0.5",
     "@angular/upgrade": "^14.0.5",
     "@swimlane/ngx-charts": "^20.1.0",
+    "angular-gridster2": "^14.1.4",
+    "ng-dynamic-component": "^10.2.1",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

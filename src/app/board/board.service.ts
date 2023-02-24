@@ -32,7 +32,7 @@ export class BoardService {
       id: BoardType.EMPTYBOARDCOLLECTION,
       relationship: Hiearchy.PARENT,
       tabs: [],
-      rows: [],
+      gadgets: [],
     };
 
     this.setupEventListeners();
@@ -70,28 +70,7 @@ export class BoardService {
 
           updatedGadgetList.push(incomingGadget);
 
-          //pick an empty column to insert the gadget into
-          let gadgetAdded = false;
-          board.rows[0].columns.forEach((column) => {
-            if (column.gadgets && column.gadgets.length === 0) {
-              //add gadget here
-
-              if(gadgetAdded == false){
-                column.gadgets = updatedGadgetList;
-                gadgetAdded = true;
-              }
-            }
-          });
-
-          //if no empty column found then insert in the first column
-          if (gadgetAdded == false) {
-            //add the gadget to the first available column
-            board.rows[0].columns[0].gadgets.forEach((gadget) => {
-              updatedGadgetList.push(gadget);
-            });
-
-            board.rows[0].columns[0].gadgets = updatedGadgetList;
-          }
+          board.gadgets = [...board.gadgets, ...updatedGadgetList];
         }
       });
 
@@ -103,8 +82,8 @@ export class BoardService {
     this.getBoardCollection().subscribe((boardCollection: IBoardCollection) => {
       boardCollection.boardList.forEach((board) => {
         if (board.id == incomingBoard.id) {
-          board.rows = [];
-          board.rows = [...incomingBoard.rows];
+          board.gadgets = [];
+          board.gadgets = [...incomingBoard.gadgets];
           board.structure = incomingBoard.structure;
         }
       });
@@ -116,8 +95,8 @@ export class BoardService {
     this.getBoardCollection().subscribe((boardCollection: IBoardCollection) => {
       boardCollection.boardList.forEach((board) => {
         if (board.id == incomingBoard.id) {
-          board.rows = [];
-          board.rows = [...incomingBoard.rows];
+          board.gadgets = [];
+          board.gadgets = [...incomingBoard.gadgets];
         }
       });
       this.saveBoardCollectionToDestination(boardCollection);
@@ -134,12 +113,11 @@ export class BoardService {
         this.createNewBoard(event);
       });
 
-      this.eventService
+    this.eventService
       .listenForBoardUpdateNameDescriptionRequestEvent()
       .subscribe((event: IEvent) => {
         this.updateBoard(event);
       });
-  
 
     this.eventService
       .listenForBoardDeleteRequestEvent()
@@ -155,30 +133,24 @@ export class BoardService {
   }
 
   private saveBoardCollectionToDestination(boardCollection: IBoardCollection) {
-    
-    if(environment.useDBForBoardStorage){
-
-
-    }else{
+    if (environment.useDBForBoardStorage) {
+    } else {
       localStorage.removeItem(this.BOARDCOLLECTION);
-      localStorage.setItem(this.BOARDCOLLECTION, JSON.stringify(boardCollection));
-
+      localStorage.setItem(
+        this.BOARDCOLLECTION,
+        JSON.stringify(boardCollection)
+      );
     }
-    
   }
 
   private getBoardCollectionFromSource(): IBoardCollection {
     let _data;
-    
-    if(environment.useDBForBoardStorage){
 
-
-    }else{
-
+    if (environment.useDBForBoardStorage) {
+    } else {
       _data = localStorage.getItem(this.BOARDCOLLECTION);
-    
     }
-    
+
     if (_data == null) {
       return { lastSelectedBoard: -1, boardList: [] };
     } else {
@@ -200,18 +172,7 @@ export class BoardService {
         id: BoardType.DEFAULT,
         tabs: [{ title: 'Board', id: BoardType.DEFAULT }],
         relationship: Hiearchy.PARENT,
-        rows: [
-          {
-            columns: [
-              {
-                gadgets: [],
-              },
-              {
-                gadgets: [],
-              },
-            ],
-          },
-        ],
+        gadgets: [],
       },
     ];
   }
@@ -297,24 +258,19 @@ export class BoardService {
     });
   }
 
-  private updateBoard(event: IEvent){
-
-    console.log("Logic for updating the board");
+  private updateBoard(event: IEvent) {
+    console.log('Logic for updating the board');
 
     this.getBoardCollection().subscribe((boardCollection: IBoardCollection) => {
       boardCollection.boardList.forEach((board) => {
         if (board.id == event.data['id']) {
-
-          console.log("found board with id: " + event.data['id']);
+          console.log('found board with id: ' + event.data['id']);
           board.title = event.data['title'];
           board.description = event.data['description'];
         }
       });
       this.saveBoardCollectionToDestination(boardCollection);
     });
-
-
-
   }
   private deleteBoard(event: IEvent) {
     this.getBoardCollection().subscribe((boardCollection: IBoardCollection) => {
@@ -392,16 +348,14 @@ export class BoardService {
     this.getBoardCollection().subscribe((boardCollection: IBoardCollection) => {
       //find board
       boardCollection.boardList.forEach((board) => {
-        board.rows.forEach((rowData) => {
-          rowData.columns.forEach((columnData) => {
-            let idx = columnData.gadgets.findIndex(
-              (gadget) => gadget.instanceId === eventDataGadgetInstanceId.data
-            );
-            if (idx >= 0) {
-              columnData.gadgets.splice(idx, 1);
-              this.saveBoardCollectionToDestination(boardCollection);
-            }
-          });
+        board.gadgets.forEach((gadget) => {
+          let idx = gadget['findIndex'](
+            (gadget2: { instanceId: any; }) => gadget2.instanceId === eventDataGadgetInstanceId.data
+          );
+          if (idx >= 0) {
+            gadget['splice'](idx, 1);
+            this.saveBoardCollectionToDestination(boardCollection);
+          }
         });
       });
     });
@@ -413,15 +367,11 @@ export class BoardService {
   ) {
     this.getBoardCollection().subscribe((boardCollection: IBoardCollection) => {
       boardCollection.boardList.forEach((board) => {
-        board.rows.forEach((row) => {
-          row.columns.forEach((column) => {
-            column.gadgets.forEach((gadget) => {
-              if (gadget.instanceId === instanceId) {
-                this.updateProperties(gadgetPropertiesAsJSON, gadget);
-                this.saveBoardCollectionToDestination(boardCollection);
-              }
-            });
-          });
+        board.gadgets.forEach((gadget) => {
+          if (gadget.instanceId === instanceId) {
+            this.updateProperties(gadgetPropertiesAsJSON, gadget);
+            this.saveBoardCollectionToDestination(boardCollection);
+          }
         });
       });
     });

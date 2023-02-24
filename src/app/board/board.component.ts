@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -6,12 +6,24 @@ import {
 } from '@angular/cdk/drag-drop';
 
 import { IEvent, EventService } from '../eventservice/event.service';
-import { BoardType, IBoard } from './board.model';
+import {
+  BoardType,
+  DashboardConfig,
+  DashboardItemComponentInterface,
+  IBoard,
+} from './board.model';
 import { BoardService } from './board.service';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { IGadget } from '../gadgets/common/gadget-common/gadget-base/gadget.model';
 import { UntypedFormControl } from '@angular/forms';
 import { LayoutService } from '../layout/layout.service';
+import { DisplayGrid, GridType } from 'angular-gridster2';
+import { BarChartComponent } from '../gadgets/bar-chart/bar-chart.component';
+import { AreaChartComponent } from '../gadgets/area-chart/area-chart.component';
+import { AppComponent } from '../app.component';
+import { GridsterItem } from 'angular-gridster2/public_api';
+import { LibraryService } from '../library/library.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-board',
@@ -34,11 +46,21 @@ export class BoardComponent implements OnInit {
   boardData!: IBoard;
   boardExists: boolean;
   boardHasGadgets: boolean;
+  options!: DashboardConfig;
+  private canDrop = true;
+  public components: any = {
+    BarChartComponent: BarChartComponent,
+    AreaChartComponent: AreaChartComponent,
+  };
+  widgetItems!: IGadget[];
 
   constructor(
     private eventService: EventService,
     private boardService: BoardService,
-    private layoutService: LayoutService
+    private layoutService: LayoutService,
+    private elementRef: ElementRef,
+    private renderer: Renderer2,
+    public libraryService: LibraryService
   ) {
     this.boardExists = false;
     this.boardHasGadgets = false;
@@ -57,8 +79,45 @@ export class BoardComponent implements OnInit {
 
   ngOnInit(): void {
     this.displayLastSelectedBoard();
+    this.getOptions();
+    this.getWidgetItems();
   }
+  public getOptions() {
+    //
+    // There is some documentation re angular-gridster2's config properties in this file: gridsterConfig.constant.ts
+    // See: https://github.com/tiberiuzuld/angular-gridster2/blob/master/projects/angular-gridster2/src/lib/gridsterConfig.constant.ts
+    //
 
+    this.options = {
+      disablePushOnDrag: true,
+      displayGrid: DisplayGrid.Always,
+      draggable: {
+        enabled: true,
+        ignoreContent: false,
+        // dropOverItems: true,
+        dropOverItems: false,
+        dragHandleClass: 'drag-handler',
+        ignoreContentClass: 'no-drag',
+      },
+      emptyCellDragMaxCols: 50,
+      emptyCellDragMaxRows: 50,
+      emptyCellDropCallback: this.onDrop.bind(this),
+      enableEmptyCellClick: false,
+      enableEmptyCellContextMenu: false,
+      enableEmptyCellDrop: true,
+      enableEmptyCellDrag: false,
+      gridType: GridType.Fit,
+      itemResizeCallback: this.itemResize.bind(this),
+      maxCols: 7,
+      maxRows: 20,
+      minCols: 7,
+      minRows: 6,
+      pushDirections: { north: true, east: true, south: true, west: true },
+      pushItems: true,
+      resizable: { enabled: true },
+      // swap: true,
+    };
+  }
   /**
    * Event Listners
    */
@@ -81,7 +140,7 @@ export class BoardComponent implements OnInit {
         this.displayNavSelectedBoard(event.data); //boardId
       });
 
-      this.eventService
+    this.eventService
       .listenForLayoutChangeEvent()
       .subscribe((event: IEvent) => {
         this.layoutService.changeLayout(event, this.boardData);
@@ -102,8 +161,9 @@ export class BoardComponent implements OnInit {
         this.saveNewGadget(event.data); //IGadget
       });
 
-      this.eventService.listenForGadgetPropertyChangeEvents()
-      .subscribe((event:IEvent)=>{
+    this.eventService
+      .listenForGadgetPropertyChangeEvents()
+      .subscribe((event: IEvent) => {
         this.displayLastSelectedBoard();
       });
 
@@ -111,13 +171,14 @@ export class BoardComponent implements OnInit {
       this.displayLastSelectedBoard();
     });
 
-    this.eventService.listenForBoardUpdateNameDescriptionRequestEvent().subscribe((event)=>{
-
-      if (this.boardData.id === event.data['id']){
-        this.boardData.description = event.data['description'];
-        this.boardData.title = event.data['title'];
-      }
-    });
+    this.eventService
+      .listenForBoardUpdateNameDescriptionRequestEvent()
+      .subscribe((event) => {
+        if (this.boardData.id === event.data['id']) {
+          this.boardData.description = event.data['description'];
+          this.boardData.title = event.data['title'];
+        }
+      });
   }
 
   /**
@@ -130,7 +191,6 @@ export class BoardComponent implements OnInit {
     //getBoardData
     this.boardService.getLastSelectedBoard().subscribe((boardData: IBoard) => {
       this.prepareBoardAndShow(boardData);
-
     });
   }
 
@@ -164,10 +224,8 @@ export class BoardComponent implements OnInit {
 
   doesTheBoardHaveGadgets() {
     let gadgetCount = 0;
-    this.boardData.rows.forEach((rowData) => {
-      rowData.columns.forEach((columnData) => {
-        gadgetCount += columnData.gadgets.length;
-      });
+    this.boardData.gadgets.forEach((gadget) => {
+      gadgetCount++;
     });
 
     return gadgetCount > 0;
@@ -197,5 +255,113 @@ export class BoardComponent implements OnInit {
     }
 
     this.boardService.updateBoardDueToDragAndDrop(this.boardData);
+  }
+
+  public getWidgetItems() {
+    const subscription: Subscription = this.libraryService
+      .getLibrary()
+      .subscribe((data) => {
+        this.widgetItems = data;
+        console.info('toolPaletteItems: ' + JSON.stringify(this.widgetItems));
+
+        subscription.unsubscribe();
+      });
+  }
+
+  public getWidgettem(componentType: string): any {
+    return this.widgetItems.find(
+      (widgetItem: IGadget) => widgetItem.componentType === componentType
+    );
+  }
+
+  public onDragEnter(event: any) {
+    console.info('DashboardComponent: onDragEnter()');
+
+    //
+    // Deleting a widget (GridsterItem) leaves a gridster-preview behind
+    // See: https://github.com/tiberiuzuld/angular-gridster2/issues/516
+    //
+
+    const gridsterPreviewElements =
+      this.elementRef.nativeElement.getElementsByTagName('gridster-preview');
+
+    // this.renderer.setStyle(gridsterPreview[0], 'display', 'block');
+    this.renderer.setStyle(
+      gridsterPreviewElements[0],
+      'background',
+      'rgba(0, 0, 0, .15)'
+    );
+  }
+
+  public onDrop(event: any) {
+    console.info('DashboardComponent: onDrop()');
+
+    //
+    // emptyCellDropCallback is called twice
+    // See: https://github.com/tiberiuzuld/angular-gridster2/issues/513
+    //
+
+    console.info('DashboardComponent: canDrop === ' + this.canDrop);
+
+    if (this.canDrop) {
+      this.canDrop = false;
+
+      const widgetComponentName =
+        event.dataTransfer.getData('widgetIdentifier');
+
+      const gadgetItem = this.getWidgettem(widgetComponentName);
+      const widget: IGadget = { ...gadgetItem, cols: 4, rows: 4, y: 0, x: 0 };
+      // update board gadget here
+      //this.boardData.gadgets.push(widget);
+      console.log('---> adding gadget');
+      console.log(widget);
+      this.eventService.emitLibraryAddGadgetEvent({ data: widget });
+
+      setTimeout(() => {
+        this.canDrop = true;
+      }, 1000);
+    }
+
+    // console.info('Widget Id: ' + widgetId);
+    // console.info('toolPaletteItem: ' + JSON.stringify(toolPaletteItem));
+    // console.info('widget: ' + JSON.stringify(widget));
+  }
+
+  public itemResize(
+    item: GridsterItem,
+    itemComponent: DashboardItemComponentInterface
+  ): void {
+    console.info('DashboardComponent: itemResize()');
+
+    // this.dashboardWidgetService.reflowWidgets();
+  }
+
+  public onDelete(item: any) {
+    console.info('DashboardComponent: onDelete()');
+
+    // this.items.splice(this.items.indexOf(item), 1);
+
+    //
+    // Deleting a widget (GridsterItem) leaves a gridster-preview behind
+    // See: https://github.com/tiberiuzuld/angular-gridster2/issues/516
+    //
+
+    const gridsterPreviewElements =
+      this.elementRef.nativeElement.getElementsByTagName('gridster-preview');
+
+    // this.renderer.setStyle(gridsterPreview[0], 'display', 'none !important');
+    this.renderer.setStyle(gridsterPreviewElements[0], 'background', '#fafafa');
+
+    // this.logger.info('Widgets: ' + JSON.stringify(this.items));
+  }
+
+  public onSettings(item: any) {
+    console.info('DashboardComponent: onSettings()');
+    /*
+    this.dialogService.openAlert({
+      title: 'Alert',
+      message: 'You clicked the Settings button.',
+      closeButton: 'CLOSE'
+    });*/
   }
 }

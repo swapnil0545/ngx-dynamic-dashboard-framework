@@ -14,7 +14,57 @@
     *ngFor="let tab of boardData.tabs; let index = index"
     [label]="tab.title"
   >
-    <div *ngFor="let row of boardData.rows; let r = index">
+    <gridster
+      [options]="options"
+      (dragenter)="onDragEnter($event)"
+      (drop)="onDrop($event)"
+      style="background-color: transparent"
+    >
+      <ng-container
+        *ngFor="let item of boardData.gadgets"
+        style="overflow: hidden"
+      >
+        <gridster-item [item]="item" class="crm-dashboard-widget">
+          <mat-toolbar class="crm-dashboard-widget-toolbar">
+            <mat-toolbar-row class="crm-dashboard-widget-toolbar-row">
+              {{ item.title }}
+
+              <div style="margin-left: auto;">
+                <button mat-button class="crm-dashboard-widget-toolbar-button">
+                  <mat-icon class="drag-handler">open_with</mat-icon>
+                </button>
+
+                <button
+                  mat-button
+                  class="crm-dashboard-widget-toolbar-button"
+                  (click)="onSettings(item)"
+                >
+                  <mat-icon>settings</mat-icon>
+                </button>
+
+                <button
+                  mat-button
+                  class="crm-dashboard-widget-toolbar-button"
+                  (click)="onDelete(item)"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </mat-toolbar-row>
+          </mat-toolbar>
+
+          <!--<ndc-dynamic class="no-drag"
+            [ndcDynamicComponent]="components[item.componentType]"
+            [ndcDynamicInputs]="item.componentType"
+          ></ndc-dynamic>-->
+          <gadget-grid-cell-host class="no-drag"
+            [gadgetData]="item"
+          ></gadget-grid-cell-host>
+        </gridster-item>
+      </ng-container>
+    </gridster>
+
+    <!--<div *ngFor="let row of boardData.gadgets; let r = index">
       <div cdkDropListGroup [ngClass]="boardData.structure">
         <div
           *ngFor="let col of row.columns; let c = index"
@@ -30,10 +80,8 @@
           ></gadget-grid-cell-host>
         </div>
       </div>
-    </div>
+    </div>-->
   </mat-tab>
-
-  
 </mat-tab-group>
 
 <div *ngIf="!boardExists" class="grid-instruction">

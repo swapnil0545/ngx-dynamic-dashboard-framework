@@ -7,6 +7,8 @@
     "icon": "../../assets/images/bar-chart.png",
     "instanceId": -1,
     "tags": [],
+    "rows": 5,
+    "cols": 5,
     "propertyPages": [
       {
         "displayName": "Configuration",
@@ -46,6 +48,10 @@
     "icon": "../../assets/images/trend.png",
     "instanceId": -1,
     "tags": [],
+    "rows": 5,
+    "cols": 5,
+    "x": 0,
+    "y": 0,
     "propertyPages": [
       {
         "displayName": "Configuration",
@@ -147,7 +153,6 @@
             "order": 1,
             "value": 0
           }
-          
         ]
       }
     ],
@@ -267,8 +272,7 @@
             "value": "Example Notification Text",
             "required": true,
             "order": 1
-          }
-          ,
+          },
           {
             "controlType": "number",
             "key": "fontsize2",
@@ -293,8 +297,7 @@
             "value": "",
             "required": false,
             "order": 1
-          }
-          ,
+          },
           {
             "controlType": "number",
             "key": "fontsize3",
@@ -578,5 +581,4 @@
       }
     ]
   }
- 
 ]

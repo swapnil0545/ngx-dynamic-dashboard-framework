@@ -1,3 +1,22 @@
+<mat-list style="padding: 10px;">
+
+  <mat-card *ngFor="let item of library; let idx = index" style="padding: 8px; margin-bottom: 10px; text-align: center;">
+
+    <img mat-card-sm-image
+         [src]="item.icon"
+         [alt]="item.name"
+         draggable="true"
+         (dragstart)="onDragStart($event, item)">
+
+    <mat-card-content>
+      <mat-card-subtitle>
+        {{item.name}}
+      </mat-card-subtitle>
+    </mat-card-content>
+
+  </mat-card>
+
+</mat-list>
 <h1>Add Tool</h1>
 <cdk-virtual-scroll-viewport itemSize="50" class="example-viewport">
   <div class="grid">

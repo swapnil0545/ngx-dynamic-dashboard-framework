@@ -1,3 +1,4 @@
+import { GridsterItem, GridsterItemComponentInterface } from 'angular-gridster2/public_api';
 import { IAction, IGadget, IPropertyPage, ITag } from './gadget.model';
 
 export abstract class GadgetBase implements IGadget {
@@ -11,6 +12,10 @@ export abstract class GadgetBase implements IGadget {
   propertyPages: IPropertyPage[];
   actions: IAction[];
   inConfig: boolean;
+  x: number;
+  y: number;
+  rows: number;
+  cols: number;
 
   constructor() {
     this.componentType = '';
@@ -23,6 +28,10 @@ export abstract class GadgetBase implements IGadget {
     this.propertyPages = [];
     this.actions = [];
     this.inConfig = false;
+    this.x = 0;
+    this.y = 0;
+    this.rows = 5;
+    this.cols = 5;
   }
 
   setConfiguration(gadgetData: IGadget) {
