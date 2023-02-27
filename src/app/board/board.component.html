@@ -29,7 +29,7 @@
             <mat-toolbar-row class="crm-dashboard-widget-toolbar-row">
               {{ item.title }}
 
-              <div style="margin-left: auto;">
+              <div style="margin-left: auto">
                 <button mat-button class="crm-dashboard-widget-toolbar-button">
                   <mat-icon class="drag-handler">open_with</mat-icon>
                 </button>
@@ -57,9 +57,19 @@
             [ndcDynamicComponent]="components[item.componentType]"
             [ndcDynamicInputs]="item.componentType"
           ></ndc-dynamic>-->
-          <gadget-grid-cell-host class="no-drag"
+          <gadget-grid-cell-host
+            class="no-drag"
             [gadgetData]="item"
           ></gadget-grid-cell-host>
+        </gridster-item>
+      </ng-container>
+      <ng-container
+        *ngIf="boardData.gadgets.length < 1"
+        style="overflow: hidden"
+      >
+        <gridster-item [item]="item" *ngFor="let item of emptyGadget">
+          <div class="button-holder"></div>
+          <h2>Temp widget. Drag and drop any widget from widget library.</h2>
         </gridster-item>
       </ng-container>
     </gridster>

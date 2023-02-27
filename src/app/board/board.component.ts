@@ -53,6 +53,7 @@ export class BoardComponent implements OnInit {
     AreaChartComponent: AreaChartComponent,
   };
   widgetItems!: IGadget[];
+  emptyGadget!: Array<GridsterItem>;
 
   constructor(
     private eventService: EventService,
@@ -62,6 +63,14 @@ export class BoardComponent implements OnInit {
     private renderer: Renderer2,
     public libraryService: LibraryService
   ) {
+    this.emptyGadget = [
+      {
+        x: 0,
+        y: 0,
+        rows: 4,
+        cols: 4,
+      },
+    ];
     this.boardExists = false;
     this.boardHasGadgets = false;
     this.setupBoardEventListeners();
