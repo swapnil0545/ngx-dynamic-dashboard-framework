@@ -5,7 +5,6 @@ import { EventService } from 'src/app/eventservice/event.service';
 import { GadgetBase } from '../common/gadget-common/gadget-base/gadget.base';
 import { curveBasis } from 'd3-shape';
 
-
 export interface Color {
   name: string;
   selectable: boolean;
@@ -15,115 +14,118 @@ export interface Color {
 @Component({
   selector: 'app-area-chart',
   templateUrl: './area-chart.component.html',
-  styleUrls: ['./area-chart.component.scss']
+  styleUrls: ['./area-chart.component.scss'],
 })
-export class AreaChartComponent extends GadgetBase  implements OnInit {
-
-  curveShape:any =  curveBasis;
+export class AreaChartComponent extends GadgetBase implements OnInit {
+  curveShape: any = curveBasis;
   multi = [
     {
-      "name": "Armani",
-      "series": [
+      name: 'Armani',
+      series: [
         {
-          "name": "Monday",
-          "value": 320
+          name: 'Monday',
+          value: 320,
         },
         {
-          "name": "Wednesday",
-          "value": 730
+          name: 'Wednesday',
+          value: 730,
         },
         {
-          "name": "Friday",
-          "value": 294
-        }
-      ]
+          name: 'Friday',
+          value: 294,
+        },
+      ],
     },
     {
-      "name": "GUUCI",
-      "series": [
+      name: 'GUUCI',
+      series: [
         {
-          "name": "Monday",
-          "value": 480
+          name: 'Monday',
+          value: 480,
         },
         {
-          "name": "Wednesday",
-          "value": 300
+          name: 'Wednesday',
+          value: 300,
         },
         {
-          "name": "Friday",
-          "value": 180
-        }
-      ]
+          name: 'Friday',
+          value: 180,
+        },
+      ],
     },
 
     {
-      "name": "Ralph Lauren",
-      "series": [
+      name: 'Ralph Lauren',
+      series: [
         {
-          "name": "Monday",
-          "value": 250
+          name: 'Monday',
+          value: 250,
         },
         {
-          "name": "Wednesday",
-          "value": 309
+          name: 'Wednesday',
+          value: 309,
         },
         {
-          "name": "Friday",
-          "value": 111
-        }
-      ]
+          name: 'Friday',
+          value: 111,
+        },
+      ],
     },
     {
-      "name": "Polo",
-      "series": [
+      name: 'Polo',
+      series: [
         {
-          "name": "Monday",
-          "value": 157
+          name: 'Monday',
+          value: 157,
         },
         {
-          "name": "Wednesday",
-          "value": 62
+          name: 'Wednesday',
+          value: 62,
         },
         {
-          "name": "Friday",
-          "value": 80
-        }
-      ]
-    }
+          name: 'Friday',
+          value: 80,
+        },
+      ],
+    },
   ];
-// options
-legend: boolean = true;
-showLabels: boolean = true;
-animations: boolean = true;
-xAxis: boolean = true;
-yAxis: boolean = true;
-showYAxisLabel: boolean = true;
-showXAxisLabel: boolean = true;
-xAxisLabel: string = 'February Week 3 2022';
-yAxisLabel: string = 'Output';
-timeline: boolean = true;
+  // options
+  legend: boolean = true;
+  showLabels: boolean = true;
+  animations: boolean = true;
+  xAxis: boolean = true;
+  yAxis: boolean = true;
+  showYAxisLabel: boolean = true;
+  showXAxisLabel: boolean = true;
+  xAxisLabel: string = 'February Week 3 2022';
+  yAxisLabel: string = 'Output';
+  timeline: boolean = true;
+
+  colorScheme: Color = {
+    domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5'],
+    name: '',
+    selectable: false,
+    group: ScaleType.Linear,
+  };
 
 
+  isMaximized = false;
 
-colorScheme:Color = {
-  domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5'],
-  name: '',
-  selectable: false,
-  group: ScaleType.Linear
-};
-
-  constructor(private eventService: EventService, private boardService: BoardService) {
+  constructor(
+    private eventService: EventService,
+    private boardService: BoardService
+  ) {
     super();
   }
 
   view: any[] = [700, 300];
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   remove() {
     this.eventService.emitGadgetDeleteEvent({ data: this.instanceId });
   }
+
   propertyChangeEvent(propertiesJSON: string) {
     //update internal props
     const updatedPropsObject = JSON.parse(propertiesJSON);
@@ -136,8 +138,6 @@ colorScheme:Color = {
       console.log.apply(this.subtitle);
     }
 
-
-
     //persist changes
     this.boardService.savePropertyPageConfigurationToDestination(
       propertiesJSON,
@@ -145,4 +145,8 @@ colorScheme:Color = {
     );
   }
 
+  toggleMaximize() {
+    this.eventService.emitGadgetMaximizeEvent({ data: this.instanceId });
+    this.isMaximized = !this.isMaximized;
+  }
 }

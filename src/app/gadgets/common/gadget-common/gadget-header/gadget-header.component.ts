@@ -8,21 +8,25 @@ import { EventService } from 'src/app/eventservice/event.service';
 })
 export class GadgetHeaderComponent implements OnInit {
   @Output() removeEvent: EventEmitter<any> = new EventEmitter();
+  @Output() toggleMaximize: EventEmitter<any> = new EventEmitter();
   @Output() toggleConfigModeEvent: EventEmitter<any> = new EventEmitter();
   @Input() title: string;
   @Input() subtitle: string;
   @Input() iconpath: string;
   @Input() inConfig: boolean;
+  @Input() isMaximized: boolean;
+
   menuLabel = 'Configure';
-  constructor(private eventService:EventService) {
+  constructor(private eventService: EventService) {
     this.title = '';
     this.subtitle = '';
     this.iconpath = '';
     this.inConfig = false;
+    this.isMaximized = false;
   }
 
   ngOnInit(): void {
-    if(this.inConfig){
+    if (this.inConfig) {
       this.setMenuLabel();
     }
   }
@@ -36,13 +40,16 @@ export class GadgetHeaderComponent implements OnInit {
     this.toggleConfigModeEvent.emit();
   }
 
-  setMenuLabel(){
+  setMenuLabel() {
     if (this.menuLabel === 'Configure') {
       this.menuLabel = 'Exit Configuration';
     } else {
       this.menuLabel = 'Configure';
-       //TODO - alert board to reload config. Generalize this so that a single event can be used for this
-       this.eventService.emitBoardGadgetPropertyChangeEvent();
+      //TODO - alert board to reload config. Generalize this so that a single event can be used for this
+      this.eventService.emitBoardGadgetPropertyChangeEvent();
     }
+  }
+  toggleCardMaximize() {
+    this.toggleMaximize.emit();
   }
 }

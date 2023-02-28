@@ -1,6 +1,6 @@
-import { GridsterItem } from "angular-gridster2";
+import { GridsterItem } from 'angular-gridster2';
 
-export interface IGadget extends GridsterItem{
+export interface IGadget extends GridsterItem {
   componentType?: any;
   title: string;
   subtitle: string;
@@ -10,6 +10,7 @@ export interface IGadget extends GridsterItem{
   tags: ITag[];
   propertyPages: IPropertyPage[];
   actions: IAction[];
+  isMaximized?: boolean;
 }
 
 export interface ITag {
@@ -21,22 +22,19 @@ export interface IPropertyPage {
   displayName: string;
   groupId: string;
   position: number;
-  properties:IProperty[];
+  properties: IProperty[];
 }
 
 export interface IProperty {
-  value:any;
-  key: string ;
+  value: any;
+  key: string;
   label: string;
   required: boolean;
   order: number;
   controlType: string;
-  options:[]
+  options: [];
 }
 
 export interface IAction {
   name: string;
 }
-
-
-

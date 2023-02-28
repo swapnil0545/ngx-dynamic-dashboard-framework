@@ -98,14 +98,12 @@ export class BoardComponent implements OnInit {
     //
 
     this.options = {
-      disablePushOnDrag: true,
       gridType: GridType.Fixed,
       displayGrid: DisplayGrid.Always,
       draggable: {
         enabled: true,
         ignoreContent: false,
-        // dropOverItems: true,
-        dropOverItems: false,
+        dropOverItems: true,
         dragHandleClass: 'drag-handler',
         ignoreContentClass: 'no-drag',
       },
@@ -124,10 +122,9 @@ export class BoardComponent implements OnInit {
       maxRows: 20,
       fixedColWidth: 105,
       fixedRowHeight: 105,
-      pushDirections: { north: true, east: true, south: true, west: true },
       pushItems: true,
       resizable: { enabled: true },
-      // swap: true,
+      swap: true,
     };
   }
   /**
@@ -183,6 +180,10 @@ export class BoardComponent implements OnInit {
       this.displayLastSelectedBoard();
     });
 
+    this.eventService.listenForGadgetMaximizeEvent().subscribe((event) => {
+      this.toggleGatdgetMaximize(event);
+    });
+
     this.eventService
       .listenForBoardUpdateNameDescriptionRequestEvent()
       .subscribe((event) => {
@@ -191,6 +192,16 @@ export class BoardComponent implements OnInit {
           this.boardData.title = event.data['title'];
         }
       });
+  }
+
+  private toggleGatdgetMaximize(eventDataGadgetInstanceId: IEvent) {
+    //find board
+    let idx = this.boardData.gadgets['findIndex'](
+      (gadget2) => gadget2.instanceId === eventDataGadgetInstanceId.data
+    );
+    if (idx >= 0) {
+      this.boardData.gadgets[idx].isMaximized = !this.boardData.gadgets[idx].isMaximized;
+    }
   }
 
   /**

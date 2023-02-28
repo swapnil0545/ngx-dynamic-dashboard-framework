@@ -26,6 +26,7 @@ export class EventService {
   private gadgetPropertyChangeSubject: Subject<IEvent> = new Subject<IEvent>();
   private gadgetPropertyResizeSubject: Subject<IEvent> = new Subject<IEvent>();
   private gadgetDeleteSubject: Subject<IEvent> = new Subject<IEvent>();
+  private gadgetMaximizeSubject: Subject<IEvent> = new Subject<IEvent>();
   private userDataChangedSubject: Subject<IEvent> = new Subject<IEvent>();
   private scheduleEventDataChangedSubject: Subject<IEvent> = new Subject<IEvent>();
   private sideToolbarSubject: Subject<IEvent> = new Subject<IEvent>();
@@ -109,6 +110,14 @@ export class EventService {
 
   listenForGadgetDeleteEvent(): Observable<IEvent> {
     return this.gadgetDeleteSubject.asObservable();
+  }
+
+  emitGadgetMaximizeEvent(event: IEvent) {
+    this.gadgetMaximizeSubject.next(event);
+  }
+
+  listenForGadgetMaximizeEvent(): Observable<IEvent> {
+    return this.gadgetMaximizeSubject.asObservable();
   }
 
   emitBoardSideLayoutClickEvent() {

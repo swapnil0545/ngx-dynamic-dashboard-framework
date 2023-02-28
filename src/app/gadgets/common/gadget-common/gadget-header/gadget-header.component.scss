@@ -1,13 +1,15 @@
 .more-button {
-    position: absolute;
-    top: 5px;
-    right: 10px;
+  right: 10px;
 }
 
 mat-card-title {
-    color: #3f51b5;
+  color: #3f51b5;
 }
 
 .move-cursor {
-    cursor: move;
+  cursor: move;
+}
+.crm-dashboard-widget-toolbar-button {
+  min-width: 32px;
+  padding: 0 4px; // 16
 }
