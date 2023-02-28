@@ -99,6 +99,7 @@ export class BoardComponent implements OnInit {
 
     this.options = {
       disablePushOnDrag: true,
+      gridType: GridType.Fixed,
       displayGrid: DisplayGrid.Always,
       draggable: {
         enabled: true,
@@ -115,12 +116,14 @@ export class BoardComponent implements OnInit {
       enableEmptyCellContextMenu: false,
       enableEmptyCellDrop: true,
       enableEmptyCellDrag: false,
-      gridType: GridType.Fit,
-      itemResizeCallback: this.itemResize.bind(this),
-      maxCols: 7,
+      itemResizeCallback: BoardComponent.itemResize,
+      itemChangeCallback: this.itemChange.bind(this),
+      minCols: 8,
+      maxCols: 10,
+      minRows: 10,
       maxRows: 20,
-      minCols: 7,
-      minRows: 6,
+      fixedColWidth: 105,
+      fixedRowHeight: 105,
       pushDirections: { north: true, east: true, south: true, west: true },
       pushItems: true,
       resizable: { enabled: true },
@@ -336,12 +339,21 @@ export class BoardComponent implements OnInit {
     // console.info('widget: ' + JSON.stringify(widget));
   }
 
-  public itemResize(
+  private itemChange(
     item: GridsterItem,
     itemComponent: DashboardItemComponentInterface
-  ): void {
-    console.info('DashboardComponent: itemResize()');
+  ) {
+    console.info('itemChanged', item, itemComponent);
+    this.boardService.updateBoardDueToDragAndDrop(this.boardData);
+    this.eventService.emitBoardGadgetPropertyResizeEvent();
+  }
 
+  static itemResize(
+    item: GridsterItem,
+    itemComponent: DashboardItemComponentInterface
+  ) {
+    console.info('itemResized', item, itemComponent);
+    //this.eventService.emitBoardGadgetPropertyResizeEvent();
     // this.dashboardWidgetService.reflowWidgets();
   }
 

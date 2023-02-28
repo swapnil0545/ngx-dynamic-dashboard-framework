@@ -24,6 +24,7 @@ export class EventService {
   private libraryMenuSubject: Subject<IEvent> = new Subject<IEvent>();
   private sideMenuLayoutSelectSubject: Subject<IEvent> = new Subject<IEvent>();
   private gadgetPropertyChangeSubject: Subject<IEvent> = new Subject<IEvent>();
+  private gadgetPropertyResizeSubject: Subject<IEvent> = new Subject<IEvent>();
   private gadgetDeleteSubject: Subject<IEvent> = new Subject<IEvent>();
   private userDataChangedSubject: Subject<IEvent> = new Subject<IEvent>();
   private scheduleEventDataChangedSubject: Subject<IEvent> = new Subject<IEvent>();
@@ -133,6 +134,13 @@ export class EventService {
     return this.gadgetPropertyChangeSubject.asObservable();
   }
 
+  emitBoardGadgetPropertyResizeEvent(){
+    this.gadgetPropertyResizeSubject.next(this.emptyEvent);
+  }
+
+  listenForGadgetPropertyResizeEvents(): Observable<IEvent>{
+    return this.gadgetPropertyResizeSubject.asObservable();
+  }
 
   addSubscriber(subscriber: any) {
     this.subscribers.push(subscriber);

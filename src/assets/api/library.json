@@ -1,7 +1,7 @@
 [
   {
     "componentType": "BarChartComponent",
-    "title": "Bar Chart Component Component Tool",
+    "title": "Bar Chart Component Tool",
     "subtitle": "Bar chart tool subtitle",
     "description": "Select this tool to define and add a Product definition to the production line board.",
     "icon": "../../assets/images/bar-chart.png",
@@ -42,14 +42,14 @@
   },
   {
     "componentType": "AreaChartComponent",
-    "title": "Area Chart Component Component Tool",
+    "title": "Area Chart Component Tool",
     "subtitle": "Area chart tool subtitle",
     "description": "Select this tool to define and add a Product definition to the production line board.",
     "icon": "../../assets/images/trend.png",
     "instanceId": -1,
     "tags": [],
-    "rows": 5,
-    "cols": 5,
+    "rows": 4,
+    "cols": 4,
     "x": 0,
     "y": 0,
     "propertyPages": [

@@ -348,15 +348,13 @@ export class BoardService {
     this.getBoardCollection().subscribe((boardCollection: IBoardCollection) => {
       //find board
       boardCollection.boardList.forEach((board) => {
-        board.gadgets.forEach((gadget) => {
-          let idx = gadget['findIndex'](
-            (gadget2: { instanceId: any; }) => gadget2.instanceId === eventDataGadgetInstanceId.data
-          );
-          if (idx >= 0) {
-            gadget['splice'](idx, 1);
-            this.saveBoardCollectionToDestination(boardCollection);
-          }
-        });
+        let idx = board.gadgets['findIndex'](
+          (gadget2) => gadget2.instanceId === eventDataGadgetInstanceId.data
+        );
+        if (idx >= 0) {
+          board.gadgets['splice'](idx, 1);
+          this.saveBoardCollectionToDestination(boardCollection);
+        }
       });
     });
   }
