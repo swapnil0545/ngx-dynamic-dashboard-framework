@@ -1,0 +1,20 @@
+mat-card-content {
+  min-height: 50px;
+  display: grid;
+  justify-content: center;
+}
+
+.count {
+  font-size: 4rem;
+  color: rgb(137, 38, 194);
+}
+
+mat-card {
+  margin-bottom: 10px;
+}
+
+.align-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

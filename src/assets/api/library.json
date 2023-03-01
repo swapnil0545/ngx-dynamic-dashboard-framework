@@ -170,8 +170,8 @@
     "icon": "../../assets/images/calendar_month.png",
     "instanceId": -1,
     "tags": [],
-    "rows":1,
-    "cols":4, 
+    "rows": 1,
+    "cols": 4,
     "propertyPages": [
       {
         "displayName": "Configuration",
@@ -212,6 +212,55 @@
     ]
   },
   {
+    "componentType": "CountComponent",
+    "title": "Statistics Tool",
+    "subtitle": "Production count",
+    "description": "Select this tool to add a count/statistics",
+    "icon": "../../assets/images/count.jpg",
+    "instanceId": -1,
+    "tags": [],
+    "rows": 1,
+    "cols": 3,
+    "propertyPages": [
+      {
+        "displayName": "Configuration",
+        "groupId": "config",
+        "position": 10,
+        "properties": [
+          {
+            "controlType": "textbox",
+            "key": "title",
+            "label": "title",
+            "value": "This year",
+            "required": true,
+            "order": 1
+          },
+          {
+            "controlType": "textbox",
+            "key": "subtitle",
+            "label": "subtitle",
+            "value": "MNO Revenue To Date",
+            "required": false,
+            "order": 1
+          },
+          {
+            "controlType": "number",
+            "key": "count",
+            "label": "Count",
+            "value": "Count",
+            "required": true,
+            "order": 1
+          }
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "name": "add"
+      }
+    ]
+  },
+  {
     "componentType": "NotificationComponent",
     "title": "Notification",
     "subtitle": "",
@@ -219,8 +268,8 @@
     "icon": "../../assets/images/notification.png",
     "instanceId": -1,
     "tags": [],
-    "rows":1,
-    "cols":5,
+    "rows": 1,
+    "cols": 5,
     "propertyPages": [
       {
         "displayName": "Configuration",
@@ -527,7 +576,7 @@
     "title": "Product Score Card Tool",
     "subtitle": "Score card subtitle",
     "description": "Record results for the production line for the period of time indicated in the card.",
-    "icon": "../../assets/images/count.jpg",
+    "icon": "../../assets/images/count-icon.png",
     "instanceId": -1,
     "tags": [],
     "propertyPages": [

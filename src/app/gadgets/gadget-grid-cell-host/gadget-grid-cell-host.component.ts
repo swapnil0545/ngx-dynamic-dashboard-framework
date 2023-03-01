@@ -1,9 +1,4 @@
-import {
-  Component,
-  Input,
-  ViewContainerRef,
-  OnInit
-} from '@angular/core';
+import { Component, Input, ViewContainerRef, OnInit } from '@angular/core';
 import { AreaChartComponent } from '../area-chart/area-chart.component';
 import { BarChartComponent } from '../bar-chart/bar-chart.component';
 import { IGadget } from '../common/gadget-common/gadget-base/gadget.model';
@@ -15,6 +10,7 @@ import { DateComponent } from '../date/date.component';
 import { NotificationComponent } from '../notification/notification.component';
 import { UsergroupComponent } from '../usergroup/usergroup.component';
 import { EventsComponent } from '../events/events.component';
+import { CountComponent } from '../count/count.component';
 
 /*
  this class handles the dynamic creation of components
@@ -38,10 +34,10 @@ export class GadgetGridCellHostComponent implements OnInit {
       tags: [],
       propertyPages: [],
       actions: [],
-      x:0,
-      y:0,
-      rows:0,
-      cols:0
+      x: 0,
+      y: 0,
+      rows: 0,
+      cols: 0,
     };
   }
 
@@ -60,8 +56,8 @@ export class GadgetGridCellHostComponent implements OnInit {
         gadgetRef = this.componentHost.createComponent(ScoreCardComponent);
         break;
       case 'BarChartComponent':
-          gadgetRef = this.componentHost.createComponent(BarChartComponent);
-          break;
+        gadgetRef = this.componentHost.createComponent(BarChartComponent);
+        break;
       case 'AreaChartComponent':
         gadgetRef = this.componentHost.createComponent(AreaChartComponent);
         break;
@@ -71,6 +67,9 @@ export class GadgetGridCellHostComponent implements OnInit {
       case 'DateComponent':
         gadgetRef = this.componentHost.createComponent(DateComponent);
         break;
+      case 'CountComponent':
+        gadgetRef = this.componentHost.createComponent(CountComponent);
+        break;
       case 'NotificationComponent':
         gadgetRef = this.componentHost.createComponent(NotificationComponent);
         break;
@@ -78,8 +77,8 @@ export class GadgetGridCellHostComponent implements OnInit {
         gadgetRef = this.componentHost.createComponent(UsergroupComponent);
         break;
       case 'EventsComponent':
-          gadgetRef = this.componentHost.createComponent(EventsComponent);
-          break;
+        gadgetRef = this.componentHost.createComponent(EventsComponent);
+        break;
       default:
       //do nothing
     }

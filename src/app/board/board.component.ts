@@ -67,8 +67,8 @@ export class BoardComponent implements OnInit {
       {
         x: 0,
         y: 0,
-        rows: 4,
-        cols: 4,
+        rows: 1,
+        cols: 2,
       },
     ];
     this.boardExists = false;

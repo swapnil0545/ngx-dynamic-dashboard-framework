@@ -20,7 +20,7 @@ import { GadgetGridCellHostComponent } from './gadget-grid-cell-host/gadget-grid
 import { ScoreCardComponent } from './score-card/score-card.component';
 import { DynamicFormModule } from '../dynamic-form/dynamic-form-module';
 import { HttpClientModule } from '@angular/common/http';
-import {MatChipsModule} from '@angular/material/chips';
+import { MatChipsModule } from '@angular/material/chips';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { AreaChartComponent } from './area-chart/area-chart.component';
@@ -29,6 +29,7 @@ import { DateComponent } from './date/date.component';
 import { NotificationComponent } from './notification/notification.component';
 import { UsergroupComponent } from './usergroup/usergroup.component';
 import { EventsComponent } from './events/events.component';
+import { CountComponent } from './count/count.component';
 @NgModule({
   declarations: [
     ImageComponent,
@@ -41,8 +42,8 @@ import { EventsComponent } from './events/events.component';
     DateComponent,
     NotificationComponent,
     UsergroupComponent,
-    EventsComponent
-
+    EventsComponent,
+    CountComponent,
   ],
   imports: [
     CommonModule,
@@ -63,23 +64,20 @@ import { EventsComponent } from './events/events.component';
     HttpClientModule,
     FormsModule,
     MatChipsModule,
-    NgxChartsModule
+    NgxChartsModule,
   ],
-    exports: [
-      ImageComponent,
-      ProductComponent,
-      GadgetGridCellHostComponent,
-      ScoreCardComponent,
-      BarChartComponent,
-      DateComponent,
-      NotificationComponent,
-      UsergroupComponent,
-      EventsComponent
-    ],
-    providers: [
-      ImageService
-
-    ]
-
+  exports: [
+    ImageComponent,
+    ProductComponent,
+    GadgetGridCellHostComponent,
+    ScoreCardComponent,
+    BarChartComponent,
+    DateComponent,
+    NotificationComponent,
+    UsergroupComponent,
+    EventsComponent,
+    CountComponent
+  ],
+  providers: [ImageService],
 })
 export class GadgetsModule {}
