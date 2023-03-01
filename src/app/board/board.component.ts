@@ -98,8 +98,10 @@ export class BoardComponent implements OnInit {
     //
 
     this.options = {
-      gridType: GridType.Fixed,
-      displayGrid: DisplayGrid.Always,
+      gridType: GridType.VerticalFixed,
+      fixedColWidth: 105,
+      fixedRowHeight: 105,
+      displayGrid: DisplayGrid.OnDragAndResize,
       draggable: {
         enabled: true,
         ignoreContent: false,
@@ -120,8 +122,6 @@ export class BoardComponent implements OnInit {
       maxCols: 10,
       minRows: 10,
       maxRows: 20,
-      fixedColWidth: 105,
-      fixedRowHeight: 105,
       pushItems: true,
       resizable: { enabled: true },
       swap: true,
@@ -200,8 +200,10 @@ export class BoardComponent implements OnInit {
       (gadget2) => gadget2.instanceId === eventDataGadgetInstanceId.data
     );
     if (idx >= 0) {
-      this.boardData.gadgets[idx].isMaximized = !this.boardData.gadgets[idx].isMaximized;
+      this.boardData.gadgets[idx].isMaximized =
+        !this.boardData.gadgets[idx].isMaximized;
     }
+    triggerWindowResize();
   }
 
   /**
@@ -356,7 +358,7 @@ export class BoardComponent implements OnInit {
   ) {
     console.info('itemChanged', item, itemComponent);
     this.boardService.updateBoardDueToDragAndDrop(this.boardData);
-    this.eventService.emitBoardGadgetPropertyResizeEvent();
+    // this.eventService.emitBoardGadgetPropertyResizeEvent();
   }
 
   static itemResize(
@@ -364,6 +366,8 @@ export class BoardComponent implements OnInit {
     itemComponent: DashboardItemComponentInterface
   ) {
     console.info('itemResized', item, itemComponent);
+
+    triggerWindowResize();
     //this.eventService.emitBoardGadgetPropertyResizeEvent();
     // this.dashboardWidgetService.reflowWidgets();
   }
@@ -396,4 +400,7 @@ export class BoardComponent implements OnInit {
       closeButton: 'CLOSE'
     });*/
   }
+}
+function triggerWindowResize() {
+  window.dispatchEvent(new Event('resize')); // to reisize respective charts
 }

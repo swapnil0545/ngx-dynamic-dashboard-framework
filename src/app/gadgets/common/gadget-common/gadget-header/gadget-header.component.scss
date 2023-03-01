@@ -9,7 +9,13 @@ mat-card-title {
 .move-cursor {
   cursor: move;
 }
+
 .crm-dashboard-widget-toolbar-button {
   min-width: 32px;
   padding: 0 4px; // 16
+}
+
+.widget-header{
+  background-color: lightgrey;
+  padding: 10px 10px 0 10px;
 }

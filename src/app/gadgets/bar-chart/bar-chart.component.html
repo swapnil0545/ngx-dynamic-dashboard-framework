@@ -1,4 +1,4 @@
-<mat-card [cdkDragDisabled]="true" cdkDrag>
+<mat-card class="widget-card">
   <app-gadget-header
     [title]="title"
     [subtitle]="subtitle"
@@ -9,7 +9,7 @@
   >
   </app-gadget-header>
 
-  <mat-card-content *ngIf="!inConfig">
+  <mat-card-content *ngIf="!inConfig" class="widget-content">
     <ngx-charts-bar-vertical
       [roundEdges]="false"
       [scheme]="colorScheme"

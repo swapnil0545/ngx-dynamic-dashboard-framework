@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ScaleType } from '@swimlane/ngx-charts';
 import { BoardService } from 'src/app/board/board.service';
-import { EventService } from 'src/app/eventservice/event.service';
+import { EventService, IEvent } from 'src/app/eventservice/event.service';
 import { GadgetBase } from '../common/gadget-common/gadget-base/gadget.base';
 import { curveBasis } from 'd3-shape';
 
@@ -108,7 +108,6 @@ export class AreaChartComponent extends GadgetBase implements OnInit {
     group: ScaleType.Linear,
   };
 
-
   isMaximized = false;
 
   constructor(
@@ -120,8 +119,17 @@ export class AreaChartComponent extends GadgetBase implements OnInit {
 
   view: any[] = [700, 300];
 
-  ngOnInit(): void {}
-
+  ngOnInit(): void {
+    this.eventService
+      .listenForGadgetPropertyResizeEvents()
+      .subscribe((event: IEvent) => {
+        this.resize();
+      });
+  }
+  // hack to resize graph
+  resize() {
+    this.multi = [...this.multi];
+  }
   remove() {
     this.eventService.emitGadgetDeleteEvent({ data: this.instanceId });
   }

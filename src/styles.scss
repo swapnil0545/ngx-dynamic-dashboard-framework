@@ -1,20 +1,44 @@
+@import "~@angular/material/theming";
+
+// always include only once per project
+@include mat-core();
+
+// import our custom themes
+@import "theme.scss";
+
+@include angular-material-theme($my-theme);
+
 /* You can add global styles to this file, and also import other style files */
 
 html,
 body {
-    height: 100%;
+  height: 100%;
 }
 
 body {
-    margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
-    background: whitesmoke !important;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: whitesmoke !important;
 }
 
 .example-spacer {
-    flex: 1 1 auto;
+  flex: 1 1 auto;
 }
 
 mat-dialog-container {
-    background: whitesmoke !important;
+  background: whitesmoke !important;
+}
+
+gridster-item .mat-card {
+  padding: 0;
+}
+
+.widget-card {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+.widget-content{
+  height:calc(100% - 70px);
 }
