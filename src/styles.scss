@@ -29,6 +29,10 @@ mat-dialog-container {
   background: whitesmoke !important;
 }
 
+gridster-item {
+  border: 2px solid lightgray;
+}
+
 gridster-item .mat-card {
   padding: 0;
 }
@@ -39,8 +43,8 @@ gridster-item .mat-card {
   margin: 0;
 }
 
-.widget-content{
-  height:calc(100% - 70px);
+.widget-content {
+  height: calc(100% - 70px);
   margin: 10px;
   overflow: auto;
 }
