@@ -126,6 +126,9 @@ export class BoardComponent implements OnInit {
       pushItems: true,
       resizable: { enabled: true },
       swap: true,
+      keepFixedHeightInMobile: true,
+      useBodyForBreakpoint: true,
+      setGridSize: true,
     };
   }
   /**
