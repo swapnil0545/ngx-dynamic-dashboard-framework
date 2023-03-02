@@ -125,6 +125,17 @@ export class AreaChartComponent extends GadgetBase implements OnInit {
       .subscribe((event: IEvent) => {
         this.resize();
       });
+    this.boardService.getLineChartFromAPI().subscribe((data) => {
+      this.dateConvert(data);
+      this.multi = data;
+    });
+  }
+  dateConvert(value: []) {
+    value.forEach((element: any) => {
+      element.series.forEach((item: any) => {
+        item.name = new Date(item.name);
+      });
+    });
   }
   // hack to resize graph
   resize() {

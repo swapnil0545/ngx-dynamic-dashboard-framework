@@ -20,10 +20,10 @@ import { LayoutService } from '../layout/layout.service';
 import { DisplayGrid, GridType } from 'angular-gridster2';
 import { BarChartComponent } from '../gadgets/bar-chart/bar-chart.component';
 import { AreaChartComponent } from '../gadgets/area-chart/area-chart.component';
-import { AppComponent } from '../app.component';
 import { GridsterItem } from 'angular-gridster2/public_api';
 import { LibraryService } from '../library/library.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-board',
@@ -61,7 +61,8 @@ export class BoardComponent implements OnInit {
     private layoutService: LayoutService,
     private elementRef: ElementRef,
     private renderer: Renderer2,
-    public libraryService: LibraryService
+    public libraryService: LibraryService,
+    private router: Router
   ) {
     this.emptyGadget = [
       {
@@ -399,6 +400,19 @@ export class BoardComponent implements OnInit {
       message: 'You clicked the Settings button.',
       closeButton: 'CLOSE'
     });*/
+  }
+
+  loadExistingBoard() {
+    this.boardService.setBoardCollectionFromAPI();
+    setTimeout(() => {
+      this.reloadCurrentRoute();
+    }, 100);
+  }
+  reloadCurrentRoute() {
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
+    });
   }
 }
 function triggerWindowResize() {

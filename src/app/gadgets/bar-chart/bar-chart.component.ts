@@ -23,6 +23,7 @@ export class BarChartComponent extends GadgetBase implements OnInit {
     selectable: false,
     group: ScaleType.Linear,
   };
+  isMaximized = false;
 
   constructor(
     private eventService: EventService,
@@ -37,6 +38,9 @@ export class BarChartComponent extends GadgetBase implements OnInit {
       .subscribe((event: IEvent) => {
         this.resize();
       });
+    this.boardService.getBarChartFromAPI().subscribe((data) => {
+      this.saleData = data;
+    });
   }
 
   remove() {
@@ -65,5 +69,10 @@ export class BarChartComponent extends GadgetBase implements OnInit {
   // hack to resize graph
   resize() {
     this.saleData = [...this.saleData];
+  }
+
+  toggleMaximize() {
+    this.eventService.emitGadgetMaximizeEvent({ data: this.instanceId });
+    this.isMaximized = !this.isMaximized;
   }
 }

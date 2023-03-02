@@ -12,9 +12,8 @@ export const environment = {
   sessionToken: 'API_KEY',
   useDBForBoardStorage: false,
   demo: true,
-  applicationTitle:'NGX Dynamic Dashboard'
+  applicationTitle: 'NGX Dynamic Dashboard',
 };
-
 
 /*
  * For easier debugging in development mode, you can import the following file

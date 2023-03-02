@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -24,7 +25,7 @@ export class BoardService {
   BOARDCOLLECTION: string = 'boardCollection';
   emptyBoardCollectionObject: IBoard;
 
-  constructor(private eventService: EventService) {
+  constructor(private eventService: EventService, private _http: HttpClient) {
     this.emptyBoardCollectionObject = {
       title: '',
       description: '',
@@ -143,10 +144,23 @@ export class BoardService {
     }
   }
 
+  private getBoardCollectionFromAPI() {
+    const boardCollectionJson = 'boardCollection.json';
+    return this._http.get<IBoardCollection>(
+      '/assets/api/' + boardCollectionJson
+    );
+  }
+
+  public setBoardCollectionFromAPI() {
+    this.getBoardCollectionFromAPI().subscribe((BoardCollectionFromAPI) => {
+      this.saveBoardCollectionToDestination(BoardCollectionFromAPI);
+    });
+  }
+
   private getBoardCollectionFromSource(): IBoardCollection {
     let _data;
-
     if (environment.useDBForBoardStorage) {
+      //
     } else {
       _data = localStorage.getItem(this.BOARDCOLLECTION);
     }
@@ -409,5 +423,19 @@ export class BoardService {
         }
       }
     });
+  }
+
+  public getLineChartFromAPI() {
+    const boardCollectionJson = 'commercial-revenue-linechart.json';
+    return this._http.get<any>(
+      '/assets/api/' + boardCollectionJson
+    );
+  }
+
+  public getBarChartFromAPI() {
+    const boardCollectionJson = 'top-performing-audience.json';
+    return this._http.get<any>(
+      '/assets/api/' + boardCollectionJson
+    );
   }
 }

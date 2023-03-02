@@ -4,66 +4,60 @@ import { environment } from 'src/environments/environment';
 import { IUser } from './user.service';
 import { EventService } from '../../eventservice/event.service';
 
-
 @Injectable()
 export class UserDataStoreService {
-    users: Array<IUser> = [];
-   
-    constructor(private httpClient: HttpClient, private eventService: EventService) { }
+  users: Array<IUser> = [];
 
-    getUsers() {
-        return this.users;
-    }
+  constructor(
+    private httpClient: HttpClient,
+    private eventService: EventService
+  ) {}
 
-    getUsersByRole(role: string){
-        return this.users.filter((user)=>{
-            return user.roles.toLowerCase() === (role.toLowerCase());
-        })
-    }
+  getUsers() {
+    return this.users;
+  }
 
-    setUsers(userList: Array<IUser>){
-        this.users.length = 0;
-        this.users = userList;
+  getUsersByRole(role: string) {
+    return this.users.filter((user) => {
+      return user.roles.toLowerCase() === role.toLowerCase();
+    });
+  }
 
-        this.eventService.emitUserDataChanged();
+  setUsers(userList: Array<IUser>) {
+    this.users.length = 0;
+    this.users = userList;
 
-    }
+    this.eventService.emitUserDataChanged();
+  }
 
-    loadUsers(sortKey: string, sortOrder: string){
+  loadUsers(sortKey: string, sortOrder: string) {
+    this.callUsersAPI(sortKey, sortOrder).subscribe((_users) => {
+      this.users.length = 0;
+      _users.forEach((user) => {
+        this.users.push(user);
+      });
+    });
+  }
 
-        this.callUsersAPI(sortKey, sortOrder).subscribe(_users=>{
+  callUsersAPI(sortKey: string, sortOrder: string) {
+    let apiEndPoint = environment.apihost + environment.userAPI;
 
-            this.users.length = 0;
-            _users.forEach(user=>{
+    let sessionKey = sessionStorage.getItem(environment.sessionToken);
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append('sortKey', sortKey);
+    queryParams = queryParams.append('sortOrder', sortOrder);
 
-                this.users.push(user);
-            })
+    let headers = new HttpHeaders({
+      Authorization: '' + sessionKey,
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    });
 
-        })
-    }
+    const body = { title: 'Angular Get Request Example' };
 
-    callUsersAPI(sortKey: string, sortOrder: string) {
-
-        
-            let apiEndPoint = environment.apihost + environment.userAPI;
-
-            let sessionKey = sessionStorage.getItem(environment.sessionToken);
-            let queryParams = new HttpParams();
-            queryParams = queryParams.append("sortKey", sortKey);
-            queryParams = queryParams.append("sortOrder", sortOrder);
-
-            let headers = new HttpHeaders({
-                Authorization: '' + sessionKey,
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-            });
-
-            const body = { title: 'Angular Get Request Example' };
-
-            return this.httpClient.get<IUser[]>(apiEndPoint, {
-                headers: headers, params: queryParams,
-            })
-    }
-
-
+    return this.httpClient.get<IUser[]>(apiEndPoint, {
+      headers: headers,
+      params: queryParams,
+    });
+  }
 }

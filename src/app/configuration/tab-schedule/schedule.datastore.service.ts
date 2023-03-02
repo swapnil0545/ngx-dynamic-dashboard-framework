@@ -6,54 +6,48 @@ import { IScheduledEvent } from './schedule.service';
 
 @Injectable()
 export class ScheduleDataStoreService {
-    events: Array<IScheduledEvent> = [];
-   
-    constructor(private httpClient: HttpClient, private eventService: EventService) { }
+  events: Array<IScheduledEvent> = [];
 
-    getEvents() {
-        return this.events;
-    }
+  constructor(
+    private httpClient: HttpClient,
+    private eventService: EventService
+  ) {}
 
-    setEvents(eventList: Array<IScheduledEvent>){
-        this.events.length = 0;
-        this.events = eventList;
+  getEvents() {
+    return this.events;
+  }
 
-        this.eventService.emitScheduleEventDataChanged();
+  setEvents(eventList: Array<IScheduledEvent>) {
+    this.events.length = 0;
+    this.events = eventList;
 
-    }
+    this.eventService.emitScheduleEventDataChanged();
+  }
 
-    loadScheduledEvents(){
+  loadScheduledEvents() {
+    this.callUsersAPI().subscribe((_events) => {
+      this.events.length = 0;
+      _events.forEach((event) => {
+        this.events.push(event);
+      });
+    });
+  }
 
-        this.callUsersAPI().subscribe(_events=>{
+  callUsersAPI() {
+    let apiEndPoint = environment.apihost + environment.eventAPI;
 
-            this.events.length = 0;
-            _events.forEach(event=>{
+    let sessionKey = sessionStorage.getItem(environment.sessionToken);
 
-                this.events.push(event);
-            })
+    let headers = new HttpHeaders({
+      Authorization: '' + sessionKey,
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    });
 
-        })
-    }
+    const body = { title: 'Angular Get Request Example' };
 
-    callUsersAPI() {
-
-        
-            let apiEndPoint = environment.apihost + environment.eventAPI;
-
-            let sessionKey = sessionStorage.getItem(environment.sessionToken);
-
-            let headers = new HttpHeaders({
-                Authorization: '' + sessionKey,
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-            });
-
-            const body = { title: 'Angular Get Request Example' };
-
-            return this.httpClient.get<IScheduledEvent[]>(apiEndPoint, {
-                headers,
-            })
-    }
-
-
+    return this.httpClient.get<IScheduledEvent[]>(apiEndPoint, {
+      headers,
+    });
+  }
 }

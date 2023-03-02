@@ -1,0 +1,627 @@
+{
+  "lastSelectedBoard": 1677677493439,
+  "boardList": [
+    {
+      "title": "Monthly Reporting",
+      "description": "this is monthly reporting description",
+      "structure": "two_col_equal",
+      "id": 1677580700796,
+      "tabs": [
+        { "title": "Commercial", "id": 1677677493439 },
+        { "title": "Monthly Reporting", "id": "1677580700796" }
+      ],
+      "relationship": 1,
+      "gadgets": [
+        {
+          "componentType": "ProductComponent",
+          "title": "Revenue Monthly",
+          "subtitle": "Revenue component subtitle",
+          "description": "Select this tool to define and add a Product definition to the production line board.",
+          "icon": "../../assets/images/product.png",
+          "instanceId": 1677744414224,
+          "tags": [],
+          "propertyPages": [
+            {
+              "displayName": "Configuration",
+              "groupId": "config",
+              "position": 10,
+              "properties": [
+                {
+                  "controlType": "textbox",
+                  "key": "title",
+                  "label": "Title",
+                  "value": "Revenue Monthly",
+                  "required": true,
+                  "order": 1
+                },
+                {
+                  "controlType": "textbox",
+                  "key": "subtitle",
+                  "label": "Subtitle",
+                  "value": "Revenue component subtitle",
+                  "required": false,
+                  "order": 1
+                }
+              ]
+            },
+            {
+              "displayName": "Components",
+              "groupId": "config",
+              "position": 11,
+              "properties": [
+                {
+                  "controlType": "table",
+                  "key": "table",
+                  "label": "Title",
+                  "value": "Table Data",
+                  "required": false,
+                  "order": 1
+                }
+              ]
+            }
+          ],
+          "actions": [{ "name": "add" }],
+          "cols": 6,
+          "rows": 3,
+          "y": 0,
+          "x": 0
+        }
+      ]
+    },
+    {
+      "title": "Data Usage",
+      "description": "Campaign Performance",
+      "structure": "two_col_equal",
+      "id": 1677659259112,
+      "tabs": [
+        { "title": "Data Usage", "id": "1677659259112" },
+        { "title": "Comparison Graph", "id": 1677745879586 }
+      ],
+      "relationship": 0,
+      "gadgets": [
+        {
+          "componentType": "BarChartComponent",
+          "title": "Top 10 campaigns",
+          "subtitle": "By Revenue",
+          "description": "Select this tool to define and add a Product definition to the production line board.",
+          "icon": "../../assets/images/bar-chart.png",
+          "instanceId": 1677667263103,
+          "tags": [],
+          "rows": 4,
+          "cols": 5,
+          "propertyPages": [
+            {
+              "displayName": "Configuration",
+              "groupId": "config",
+              "position": 10,
+              "properties": [
+                {
+                  "controlType": "textbox",
+                  "key": "title",
+                  "label": "Title",
+                  "value": "Top 10 campaigns",
+                  "required": true,
+                  "order": 1
+                },
+                {
+                  "controlType": "textbox",
+                  "key": "subtitle",
+                  "label": "Subtitle",
+                  "value": "By Revenue",
+                  "required": false,
+                  "order": 1
+                }
+              ]
+            }
+          ],
+          "actions": [{ "name": "add" }],
+          "y": 2,
+          "x": 0
+        },
+        {
+          "componentType": "CountComponent",
+          "title": "Number of Live Campaigns",
+          "subtitle": "",
+          "description": "Select this tool to add a count/statistics",
+          "icon": "../../assets/images/count.jpg",
+          "instanceId": 1677745553825,
+          "tags": [],
+          "rows": 2,
+          "cols": 3,
+          "propertyPages": [
+            {
+              "displayName": "Configuration",
+              "groupId": "config",
+              "position": 10,
+              "properties": [
+                {
+                  "controlType": "textbox",
+                  "key": "title",
+                  "label": "title",
+                  "value": "Number of Live Campaigns",
+                  "required": true,
+                  "order": 1
+                },
+                {
+                  "controlType": "textbox",
+                  "key": "subtitle",
+                  "label": "subtitle",
+                  "value": "",
+                  "required": false,
+                  "order": 1
+                },
+                {
+                  "controlType": "number",
+                  "key": "count",
+                  "label": "Count",
+                  "value": "7",
+                  "required": true,
+                  "order": 1
+                }
+              ]
+            }
+          ],
+          "actions": [{ "name": "add" }],
+          "y": 0,
+          "x": 0
+        },
+        {
+          "componentType": "CountComponent",
+          "title": "Number of Live Audiences",
+          "subtitle": "",
+          "description": "Select this tool to add a count/statistics",
+          "icon": "../../assets/images/count.jpg",
+          "instanceId": 1677745611961,
+          "tags": [],
+          "rows": 2,
+          "cols": 3,
+          "propertyPages": [
+            {
+              "displayName": "Configuration",
+              "groupId": "config",
+              "position": 10,
+              "properties": [
+                {
+                  "controlType": "textbox",
+                  "key": "title",
+                  "label": "title",
+                  "value": "Number of Live Audiences",
+                  "required": true,
+                  "order": 1
+                },
+                {
+                  "controlType": "textbox",
+                  "key": "subtitle",
+                  "label": "subtitle",
+                  "value": "",
+                  "required": false,
+                  "order": 1
+                },
+                {
+                  "controlType": "number",
+                  "key": "count",
+                  "label": "Count",
+                  "value": "8",
+                  "required": true,
+                  "order": 1
+                }
+              ]
+            }
+          ],
+          "actions": [{ "name": "add" }],
+          "y": 0,
+          "x": 3
+        },
+        {
+          "componentType": "CountComponent",
+          "title": "Average CPM",
+          "subtitle": "",
+          "description": "Select this tool to add a count/statistics",
+          "icon": "../../assets/images/count.jpg",
+          "instanceId": 1677745657232,
+          "tags": [],
+          "rows": 2,
+          "cols": 3,
+          "propertyPages": [
+            {
+              "displayName": "Configuration",
+              "groupId": "config",
+              "position": 10,
+              "properties": [
+                {
+                  "controlType": "textbox",
+                  "key": "title",
+                  "label": "title",
+                  "value": "Average CPM",
+                  "required": true,
+                  "order": 1
+                },
+                {
+                  "controlType": "textbox",
+                  "key": "subtitle",
+                  "label": "subtitle",
+                  "value": "",
+                  "required": false,
+                  "order": 1
+                },
+                {
+                  "controlType": "number",
+                  "key": "count",
+                  "label": "Count",
+                  "value": "14.23",
+                  "required": true,
+                  "order": 1
+                }
+              ]
+            }
+          ],
+          "actions": [{ "name": "add" }],
+          "y": 0,
+          "x": 6
+        },
+        {
+          "componentType": "AreaChartComponent",
+          "title": "Top 10 campaigns",
+          "subtitle": "By Impressions",
+          "description": "Select this tool to define and add a Product definition to the production line board.",
+          "icon": "../../assets/images/trend.png",
+          "instanceId": 1677745711451,
+          "tags": [],
+          "rows": 4,
+          "cols": 4,
+          "x": 5,
+          "y": 2,
+          "propertyPages": [
+            {
+              "displayName": "Configuration",
+              "groupId": "config",
+              "position": 10,
+              "properties": [
+                {
+                  "controlType": "textbox",
+                  "key": "title",
+                  "label": "Title",
+                  "value": "Top 10 campaigns",
+                  "required": true,
+                  "order": 1
+                },
+                {
+                  "controlType": "textbox",
+                  "key": "subtitle",
+                  "label": "Subtitle",
+                  "value": "By Impressions",
+                  "required": false,
+                  "order": 1
+                }
+              ]
+            }
+          ],
+          "actions": [{ "name": "add" }]
+        }
+      ]
+    },
+    {
+      "title": "Commercial",
+      "description": "commercial description here",
+      "structure": "two_col_equal",
+      "id": 1677677493439,
+      "tabs": [
+        { "title": "Commercial", "id": 1677677493439 },
+        { "title": "Monthly Reporting", "id": "1677580700796" }
+      ],
+      "relationship": 0,
+      "gadgets": [
+        {
+          "componentType": "BarChartComponent",
+          "title": "Impressions",
+          "subtitle": "Impressions subtitle here",
+          "description": "Select this tool to define and add a Product definition to the production line board.",
+          "icon": "../../assets/images/bar-chart.png",
+          "instanceId": 1677677568855,
+          "tags": [],
+          "rows": 4,
+          "cols": 4,
+          "propertyPages": [
+            {
+              "displayName": "Configuration",
+              "groupId": "config",
+              "position": 10,
+              "properties": [
+                {
+                  "controlType": "textbox",
+                  "key": "title",
+                  "label": "Title",
+                  "value": "Impressions",
+                  "required": true,
+                  "order": 1
+                },
+                {
+                  "controlType": "textbox",
+                  "key": "subtitle",
+                  "label": "Subtitle",
+                  "value": "Impressions subtitle here",
+                  "required": false,
+                  "order": 1
+                }
+              ]
+            }
+          ],
+          "actions": [{ "name": "add" }],
+          "y": 2,
+          "x": 0
+        },
+        {
+          "componentType": "CountComponent",
+          "title": "This year",
+          "subtitle": "MNO Revenue To Date",
+          "description": "Select this tool to add a count/statistics",
+          "icon": "../../assets/images/calendar_month.png",
+          "instanceId": 1677679478175,
+          "tags": [],
+          "rows": 2,
+          "cols": 3,
+          "propertyPages": [
+            {
+              "displayName": "Configuration",
+              "groupId": "config",
+              "position": 10,
+              "properties": [
+                {
+                  "controlType": "textbox",
+                  "key": "title",
+                  "label": "This year",
+                  "value": "This year",
+                  "required": true,
+                  "order": 1
+                },
+                {
+                  "controlType": "textbox",
+                  "key": "subtitle",
+                  "label": "MNO Revenue To Date",
+                  "value": "MNO Revenue To Date",
+                  "required": false,
+                  "order": 1
+                },
+                {
+                  "controlType": "number",
+                  "key": "count",
+                  "label": "Count",
+                  "value": "0.08",
+                  "required": true,
+                  "order": 1
+                }
+              ]
+            }
+          ],
+          "actions": [{ "name": "add" }],
+          "y": 0,
+          "x": 0
+        },
+        {
+          "componentType": "CountComponent",
+          "title": "This Quarter",
+          "subtitle": "MNO Revenue To Date",
+          "description": "Select this tool to add a count/statistics",
+          "icon": "../../assets/images/calendar_month.png",
+          "instanceId": 1677679674367,
+          "tags": [],
+          "rows": 2,
+          "cols": 3,
+          "propertyPages": [
+            {
+              "displayName": "Configuration",
+              "groupId": "config",
+              "position": 10,
+              "properties": [
+                {
+                  "controlType": "textbox",
+                  "key": "title",
+                  "label": "This year",
+                  "value": "This Quarter",
+                  "required": true,
+                  "order": 1
+                },
+                {
+                  "controlType": "textbox",
+                  "key": "subtitle",
+                  "label": "MNO Revenue To Date",
+                  "value": "MNO Revenue To Date",
+                  "required": false,
+                  "order": 1
+                },
+                {
+                  "controlType": "number",
+                  "key": "count",
+                  "label": "Count",
+                  "value": "0.08",
+                  "required": true,
+                  "order": 1
+                }
+              ]
+            }
+          ],
+          "actions": [{ "name": "add" }],
+          "y": 0,
+          "x": 3
+        },
+        {
+          "componentType": "CountComponent",
+          "title": "This Month",
+          "subtitle": "MNO Revenue To Date",
+          "description": "Select this tool to add a count/statistics",
+          "icon": "../../assets/images/count.jpg",
+          "instanceId": 1677680457467,
+          "tags": [],
+          "rows": 2,
+          "cols": 3,
+          "propertyPages": [
+            {
+              "displayName": "Configuration",
+              "groupId": "config",
+              "position": 10,
+              "properties": [
+                {
+                  "controlType": "textbox",
+                  "key": "title",
+                  "label": "title",
+                  "value": "This Month",
+                  "required": true,
+                  "order": 1
+                },
+                {
+                  "controlType": "textbox",
+                  "key": "subtitle",
+                  "label": "subtitle",
+                  "value": "MNO Revenue To Date",
+                  "required": false,
+                  "order": 1
+                },
+                {
+                  "controlType": "number",
+                  "key": "count",
+                  "label": "Count",
+                  "value": "1",
+                  "required": true,
+                  "order": 1
+                }
+              ]
+            }
+          ],
+          "actions": [{ "name": "add" }],
+          "y": 0,
+          "x": 6
+        },
+        {
+          "componentType": "AreaChartComponent",
+          "title": "Revenue",
+          "subtitle": "Revenue subtitle",
+          "description": "Select this tool to define and add a Product definition to the production line board.",
+          "icon": "../../assets/images/trend.png",
+          "instanceId": 1677680543733,
+          "tags": [],
+          "rows": 4,
+          "cols": 4,
+          "x": 4,
+          "y": 2,
+          "propertyPages": [
+            {
+              "displayName": "Configuration",
+              "groupId": "config",
+              "position": 10,
+              "properties": [
+                {
+                  "controlType": "textbox",
+                  "key": "title",
+                  "label": "Title",
+                  "value": "Revenue",
+                  "required": true,
+                  "order": 1
+                },
+                {
+                  "controlType": "textbox",
+                  "key": "subtitle",
+                  "label": "Subtitle",
+                  "value": "Revenue subtitle",
+                  "required": false,
+                  "order": 1
+                }
+              ]
+            }
+          ],
+          "actions": [{ "name": "add" }]
+        }
+      ]
+    },
+    {
+      "title": "Comparison Graph",
+      "description": null,
+      "structure": "two_col_equal",
+      "id": 1677745879586,
+      "tabs": [
+        { "title": "Comparison Graph", "id": 1677745879586 },
+        { "title": "Data Usage", "id": "1677659259112" }
+      ],
+      "relationship": 1,
+      "gadgets": [
+        {
+          "componentType": "AreaChartComponent",
+          "title": "Revenue",
+          "subtitle": "",
+          "description": "Select this tool to define and add a Product definition to the production line board.",
+          "icon": "../../assets/images/trend.png",
+          "instanceId": 1677745887294,
+          "tags": [],
+          "rows": 3,
+          "cols": 4,
+          "x": 0,
+          "y": 0,
+          "propertyPages": [
+            {
+              "displayName": "Configuration",
+              "groupId": "config",
+              "position": 10,
+              "properties": [
+                {
+                  "controlType": "textbox",
+                  "key": "title",
+                  "label": "Title",
+                  "value": "Revenue",
+                  "required": true,
+                  "order": 1
+                },
+                {
+                  "controlType": "textbox",
+                  "key": "subtitle",
+                  "label": "Subtitle",
+                  "value": "",
+                  "required": false,
+                  "order": 1
+                }
+              ]
+            }
+          ],
+          "actions": [{ "name": "add" }]
+        },
+        {
+          "componentType": "AreaChartComponent",
+          "title": "Campaigns",
+          "subtitle": "Product component subtitle",
+          "description": "Select this tool to define and add a Product definition to the production line board.",
+          "icon": "../../assets/images/trend.png",
+          "instanceId": 1677745916805,
+          "tags": [],
+          "rows": 3,
+          "cols": 4,
+          "x": 4,
+          "y": 0,
+          "propertyPages": [
+            {
+              "displayName": "Configuration",
+              "groupId": "config",
+              "position": 10,
+              "properties": [
+                {
+                  "controlType": "textbox",
+                  "key": "title",
+                  "label": "Title",
+                  "value": "Campaigns",
+                  "required": true,
+                  "order": 1
+                },
+                {
+                  "controlType": "textbox",
+                  "key": "subtitle",
+                  "label": "Subtitle",
+                  "value": "Product component subtitle",
+                  "required": false,
+                  "order": 1
+                }
+              ]
+            }
+          ],
+          "actions": [{ "name": "add" }]
+        }
+      ]
+    }
+  ]
+}

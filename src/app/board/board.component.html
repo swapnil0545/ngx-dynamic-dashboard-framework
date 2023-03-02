@@ -24,7 +24,11 @@
         *ngFor="let item of boardData.gadgets"
         style="overflow: hidden"
       >
-        <gridster-item [item]="item" [ngClass]="{ 'is-maximized': item.isMaximized }" class="crm-dashboard-widget">
+        <gridster-item
+          [item]="item"
+          [ngClass]="{ 'is-maximized': item.isMaximized }"
+          class="crm-dashboard-widget"
+        >
           <!--<ndc-dynamic class="no-drag"
             [ndcDynamicComponent]="components[item.componentType]"
             [ndcDynamicInputs]="item.componentType"
@@ -66,23 +70,30 @@
   </mat-tab>
 </mat-tab-group>
 
-<div *ngIf="!boardExists" class="grid-instruction">
-  <mat-card class="board-instruction">
-    <mat-card-title>Step 1</mat-card-title>
-    <mat-card-content class="mat-card-content-grid-container">
-      <p>Create a board instance which will represent a packaging line.</p>
-      <img width="100%" src="../../assets/help/new-board.gif" />
-    </mat-card-content>
-  </mat-card>
+<div *ngIf="!boardExists">
+  <div class="row">
+    <button mat-raised-button color="primary" (click)="loadExistingBoard()">
+      Load existing board
+    </button>
+  </div>
+  <div class="grid-instruction">
+    <mat-card class="board-instruction">
+      <mat-card-title>Step 1</mat-card-title>
+      <mat-card-content class="mat-card-content-grid-container">
+        <p>Create a board instance which will represent a packaging line.</p>
+        <img width="100%" src="../../assets/help/new-board.gif" />
+      </mat-card-content>
+    </mat-card>
 
-  <mat-card class="board-instruction">
-    <mat-card-title>Step 2</mat-card-title>
-    <mat-card-content class="mat-card-content-grid-container">
-      <p>
-        Populate the board with the product image gallery tool and the product
-        component list tool.
-      </p>
-      <img width="100%" src="../../assets/help/add-gadget.gif" />
-    </mat-card-content>
-  </mat-card>
+    <mat-card class="board-instruction">
+      <mat-card-title>Step 2</mat-card-title>
+      <mat-card-content class="mat-card-content-grid-container">
+        <p>
+          Populate the board with the product image gallery tool and the product
+          component list tool.
+        </p>
+        <img width="100%" src="../../assets/help/add-gadget.gif" />
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

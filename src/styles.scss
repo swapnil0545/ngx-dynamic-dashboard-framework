@@ -42,4 +42,5 @@ gridster-item .mat-card {
 .widget-content{
   height:calc(100% - 70px);
   margin: 10px;
+  overflow: auto;
 }

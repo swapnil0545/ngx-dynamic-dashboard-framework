@@ -8,7 +8,7 @@
     (toggleConfigModeEvent)="toggleConfigMode()"
   >
   </app-gadget-header>
-  <mat-card-content *ngIf="!inConfig">
+  <mat-card-content *ngIf="!inConfig" class="widget-content">
     <div class="subsection">
       <mat-chip-list class="example-chip">
         <mat-chip selected color="primary" class="example-box">
@@ -86,7 +86,7 @@
     </table>
   </mat-card-content>
 
-  <mat-card-content *ngIf="inConfig" class="grid">
+  <mat-card-content *ngIf="inConfig" class="grid widget-content">
     <app-dynamic-form
       [gadgetTags]="tags"
       [propertyPages]="propertyPages"
