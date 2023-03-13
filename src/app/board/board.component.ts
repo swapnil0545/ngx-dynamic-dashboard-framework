@@ -105,7 +105,7 @@ export class BoardComponent implements OnInit {
       displayGrid: DisplayGrid.OnDragAndResize,
       draggable: {
         enabled: true,
-        ignoreContent: false,
+        ignoreContent: true,
         dropOverItems: true,
         dragHandleClass: 'drag-handler',
         ignoreContentClass: 'no-drag',

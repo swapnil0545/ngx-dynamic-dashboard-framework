@@ -1,4 +1,4 @@
-<mat-card-header class="widget-header move-cursor">
+<mat-card-header class="widget-header move-cursor drag-handler">
   <div
     mat-card-avatar
     style="background-image:url('{{ iconpath }}') ; background-size: cover;"
@@ -12,20 +12,6 @@
     >
   </mat-chip-listbox>
   <div style="margin-left: auto">
-    <button mat-button class="crm-dashboard-widget-toolbar-button">
-      <mat-icon class="drag-handler">open_with</mat-icon>
-    </button>
-    <!--
-    <button mat-button class="crm-dashboard-widget-toolbar-button">
-      <mat-icon>settings</mat-icon>
-    </button>-->
-    <button
-      mat-icon-button
-      class="crm-dashboard-widget-toolbar-button"
-      (click)="toggleCardMaximize()"
-    >
-      <mat-icon>{{ isMaximized ? "fullscreen_exit" : "fullscreen" }}</mat-icon>
-    </button>
     <button
       mat-icon-button
       class="more-button"
@@ -34,9 +20,24 @@
     >
       <mat-icon>more_vert</mat-icon>
     </button>
+    <!--
+    <button mat-button class="crm-dashboard-widget-toolbar-button">
+      <mat-icon>settings</mat-icon>
+    </button>-->
   </div>
   <mat-menu #menu="matMenu" xPosition="before">
-    <button mat-menu-item (click)="toggleConfigMode()">{{ menuLabel }}</button>
-    <button mat-menu-item (click)="remove()">Remove</button>
+    <button mat-menu-item (click)="toggleConfigMode()">{{ menuLabel }} <mat-icon>settings</mat-icon></button>
+    <!--<button mat-menu-item class="crm-dashboard-widget-toolbar-button">
+      Move
+      <mat-icon class="drag-handler">open_with</mat-icon>
+    </button>-->
+    <button
+      mat-menu-item
+      (click)="toggleCardMaximize()"
+    >
+      {{ isMaximized ? "Minimize" : "Maximize" }}
+      <mat-icon>{{ isMaximized ? "fullscreen_exit" : "fullscreen" }}</mat-icon>
+    </button>
+    <button mat-menu-item (click)="remove()">Remove <mat-icon>delete</mat-icon></button>
   </mat-menu>
 </mat-card-header>
