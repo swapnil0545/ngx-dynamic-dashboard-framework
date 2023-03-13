@@ -1,37 +1,42 @@
 .example-card {
-    margin-bottom: 4px;
-    margin: 20px;
+  margin-bottom: 4px;
+  margin: 20px;
 }
 
 .grid {
-    display: grid;
-    row-gap: 5px;
-    place-content: center;
+  display: grid;
+  row-gap: 5px;
+  place-content: center;
 }
 
 .example-viewport {
-    height: 670px;
+  height: 670px;
 }
 
 mat-card-content {
-    margin: 10px;
+  margin: 10px;
 }
 
 .class_color0 {
-    border-top-style: solid;
-    border-top-color: blueviolet;
-    border-top-width: 3px;
+  border-top-style: solid;
+  border-top-color: blueviolet;
+  border-top-width: 3px;
 }
 
 .class_color1 {
-    border-top-style: solid;
-    border-top-color: rgb(198, 226, 43);
-    border-top-width: 3px;
+  border-top-style: solid;
+  border-top-color: rgb(198, 226, 43);
+  border-top-width: 3px;
 }
 
 .class_color2 {
-    border-top-style: solid;
-    border-top-color: rgb(49, 226, 43);
-    border-top-width: 3px;
+  border-top-style: solid;
+  border-top-color: rgb(49, 226, 43);
+  border-top-width: 3px;
 }
 
+.library-card {
+  padding: 8px;
+  margin-bottom: 10px;
+  text-align: center;
+}

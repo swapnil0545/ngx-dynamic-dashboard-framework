@@ -1,5 +1,6 @@
 [
   {
+    "name": "Bar Chart",
     "componentType": "BarChartComponent",
     "title": "Bar Chart Component Tool",
     "subtitle": "Bar chart tool subtitle",
@@ -41,6 +42,7 @@
     ]
   },
   {
+    "name": "Area Chart",
     "componentType": "AreaChartComponent",
     "title": "Area Chart Component Tool",
     "subtitle": "Area chart tool subtitle",
@@ -84,6 +86,7 @@
     ]
   },
   {
+    "name": "Line Chart",
     "componentType": "PckLineComponent",
     "title": "Line",
     "subtitle": "Product line description",
@@ -163,6 +166,7 @@
     ]
   },
   {
+    "name": "Date",
     "componentType": "DateComponent",
     "title": "Production Date Tool",
     "subtitle": "Production Date",
@@ -212,6 +216,7 @@
     ]
   },
   {
+    "name": "Counter",
     "componentType": "CountComponent",
     "title": "Statistics Tool",
     "subtitle": "Production count",
@@ -261,6 +266,7 @@
     ]
   },
   {
+    "name": "Notification",
     "componentType": "NotificationComponent",
     "title": "Notification",
     "subtitle": "",
@@ -386,6 +392,7 @@
     ]
   },
   {
+    "name": "UserGroup",
     "componentType": "UsergroupComponent",
     "title": "Team Members",
     "subtitle": "",
@@ -425,6 +432,7 @@
     ]
   },
   {
+    "name": "Events",
     "componentType": "EventsComponent",
     "title": "Events",
     "subtitle": "",
@@ -464,6 +472,7 @@
     ]
   },
   {
+    "name": "Image",
     "componentType": "ImageComponent",
     "title": "Image Gallery",
     "description": "Select this tool to add an image gallery for the production line board.",
@@ -518,6 +527,7 @@
     ]
   },
   {
+    "name": "Product",
     "componentType": "ProductComponent",
     "title": "Product Component Tool",
     "subtitle": "Product component subtitle",
@@ -572,6 +582,7 @@
     ]
   },
   {
+    "name": "Score Card",
     "componentType": "ScoreCardComponent",
     "title": "Product Score Card Tool",
     "subtitle": "Score card subtitle",
