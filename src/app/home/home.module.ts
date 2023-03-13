@@ -10,6 +10,6 @@ import { ScheduleDataStoreService } from '../configuration/tab-schedule/schedule
   declarations: [HomeComponent],
   imports: [CommonModule, MenuModule, SidenavModule],
   exports: [],
-  providers:[UserDataStoreService, ScheduleDataStoreService]
+  providers: [UserDataStoreService, ScheduleDataStoreService],
 })
 export class HomeModule {}

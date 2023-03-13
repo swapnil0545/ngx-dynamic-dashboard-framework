@@ -10,7 +10,8 @@ export interface IEvent {
 })
 export class EventService {
   private boardCreateRequestSubject: Subject<IEvent> = new Subject<IEvent>();
-  private boardUpdateNameDescriptionSubject: Subject<IEvent> = new Subject<IEvent>();
+  private boardUpdateNameDescriptionSubject: Subject<IEvent> =
+    new Subject<IEvent>();
   private boardSelectedSubject: Subject<IEvent> = new Subject<IEvent>();
 
   private boardCreatedCompleteRequestSubject: Subject<IEvent> =
@@ -28,8 +29,10 @@ export class EventService {
   private gadgetDeleteSubject: Subject<IEvent> = new Subject<IEvent>();
   private gadgetMaximizeSubject: Subject<IEvent> = new Subject<IEvent>();
   private userDataChangedSubject: Subject<IEvent> = new Subject<IEvent>();
-  private scheduleEventDataChangedSubject: Subject<IEvent> = new Subject<IEvent>();
+  private scheduleEventDataChangedSubject: Subject<IEvent> =
+    new Subject<IEvent>();
   private sideToolbarSubject: Subject<IEvent> = new Subject<IEvent>();
+  private colorSubject: Subject<IEvent> = new Subject<IEvent>();
 
   private subscribers: Array<Subject<string>> = [];
 
@@ -74,7 +77,7 @@ export class EventService {
     return this.boardCreatedCompleteRequestSubject.asObservable();
   }
 
-  emitBoardUpdateNameDescription(event: IEvent){
+  emitBoardUpdateNameDescription(event: IEvent) {
     this.boardUpdateNameDescriptionSubject.next(event);
   }
   listenForBoardUpdateNameDescriptionRequestEvent(): Observable<IEvent> {
@@ -135,19 +138,24 @@ export class EventService {
   listenForBoardSideToolbarEvent(): Observable<IEvent> {
     return this.sideToolbarSubject.asObservable();
   }
-
-  emitBoardGadgetPropertyChangeEvent(){
+  emitColorkEvent(event: IEvent) {
+    this.colorSubject.next(event);
+  }
+  listenForColorEvent(): Observable<IEvent> {
+    return this.colorSubject.asObservable();
+  }
+  emitBoardGadgetPropertyChangeEvent() {
     this.gadgetPropertyChangeSubject.next(this.emptyEvent);
   }
-  listenForGadgetPropertyChangeEvents(): Observable<IEvent>{
+  listenForGadgetPropertyChangeEvents(): Observable<IEvent> {
     return this.gadgetPropertyChangeSubject.asObservable();
   }
 
-  emitBoardGadgetPropertyResizeEvent(){
+  emitBoardGadgetPropertyResizeEvent() {
     this.gadgetPropertyResizeSubject.next(this.emptyEvent);
   }
 
-  listenForGadgetPropertyResizeEvents(): Observable<IEvent>{
+  listenForGadgetPropertyResizeEvents(): Observable<IEvent> {
     return this.gadgetPropertyResizeSubject.asObservable();
   }
 
@@ -169,7 +177,6 @@ export class EventService {
   listenForLayoutChangeEvent(): Observable<IEvent> {
     return this.sideMenuLayoutSelectSubject.asObservable();
   }
-
 
   emitUserDataChanged() {
     this.userDataChangedSubject.next(this.emptyEvent);

@@ -8,29 +8,41 @@
 
 <mat-toolbar color="primary">
   <span *checkPermissions>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <button
+      mat-icon-button
+      class="example-icon"
+      aria-label="Example icon-button with menu icon"
+    >
       <mat-icon (click)="toggleMenu()">menu</mat-icon>
     </button>
   </span>
 
-  <span>{{applicationTitle}}</span>
+  <span>{{ applicationTitle }}</span>
   <span class="example-spacer"></span>
 
   <span *checkPermissions>
     <span class="menu-text"> Configure board</span>
-    <button mat-icon-button (click)="openConfigDialog()" class="example-icon"
-      aria-label="Example icon-button with share icon">
+    <button
+      mat-icon-button
+      (click)="openConfigDialog()"
+      class="example-icon"
+      aria-label="Example icon-button with share icon"
+    >
       <mat-icon>settings</mat-icon>
     </button>
   </span>
 
   <span *checkPermissions>
     <span class="menu-text">Add widget</span>
-    <button mat-icon-button (click)="openGadgetLibraryDialog()" aria-label="Example icon-button with heart icon">
+    <button
+      mat-icon-button
+      (click)="openGadgetLibraryDialog()"
+      aria-label="Example icon-button with heart icon"
+    >
       <mat-icon>playlist_add</mat-icon>
     </button>
   </span>
-<!--
+  <!--
   <span *checkPermissions>
     <span class="menu-text">Change layout</span>
     <button mat-icon-button (click)="toggleLayout()" class="example-icon favorite-icon"
@@ -39,14 +51,54 @@
     </button>
   </span>
 -->
-  <span style="margin-left: 20px;">
+  <button
+    mat-icon-button
+    id="theme-selector"
+    [mat-menu-trigger-for]="themeMenu"
+    matTooltip="Select a theme!"
+    tabindex="-1"
+  >
+    <mat-icon class="auto-flip">format_color_fill</mat-icon>
+  </button>
+
+  <mat-menu #themeMenu="matMenu">
+    <mat-checkbox
+      [checked]="isThemeDark"
+      (click)="$event.stopPropagation()"
+      (change)="toggleDarkness()"
+      class="mat-menu-item theme-selector-is-dark"
+      >Dark
+    </mat-checkbox>
+
+    <mat-grid-list cols="2" class="theme-selectors-container">
+      <mat-grid-tile *ngFor="let theme of themes">
+        <button
+          mat-button
+          class="theme-selector"
+          (click)="$event.stopPropagation(); setActiveTheme(theme)"
+        >
+          <div [attr.class]="theme + ' theme-primary center'">
+            <div [attr.class]="theme + ' theme-accent'"></div>
+            <div [attr.class]="theme + ' theme-warn'"></div>
+            <mat-icon *ngIf="activeTheme === theme" class="center theme-check"
+              >check</mat-icon
+            >
+          </div>
+        </button>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-menu>
+  <span style="margin-left: 20px">
     <span class="menu-text"> Log Out</span>
-    <button mat-icon-button (click)="logout()" class="example-icon favorite-icon"
-      aria-label="Example icon-button with heart icon">
+    <button
+      mat-icon-button
+      (click)="logout()"
+      class="example-icon favorite-icon"
+      aria-label="Example icon-button with heart icon"
+    >
       <mat-icon>logout</mat-icon>
     </button>
   </span>
-
 
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </mat-toolbar>

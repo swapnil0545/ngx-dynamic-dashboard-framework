@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostBinding, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { ConfigurationComponent } from '../configuration/configuration.component';
 import { EventService } from '../eventservice/event.service';
-import { LibraryComponent } from '../library/library.component';
+import { OverlayContainer } from '@angular/cdk/overlay';
+
+const THEME_DARKNESS_SUFFIX = `-dark`;
 
 @Component({
   selector: 'app-menu',
@@ -13,14 +15,27 @@ import { LibraryComponent } from '../library/library.component';
 })
 export class MenuComponent implements OnInit {
   visible = true;
-  applicationTitle:string;
+  applicationTitle: string;
+  @HostBinding('class')
+  activeThemeCssClass!: string;
+  isThemeDark = false;
+  activeTheme!: string;
+  themes: string[] = [
+    'deeppurple-amber',
+    'indigo-pink',
+    'pink-bluegrey',
+    'purple-green',
+  ];
+
   constructor(
     public dialog: MatDialog,
     private eventService: EventService,
-    private router: Router
+    private router: Router,
+    private overlayContainer: OverlayContainer
   ) {
     this.setupEventHandlers();
     this.applicationTitle = environment.applicationTitle;
+    // Set default theme here:
   }
 
   ngOnInit(): void {}
@@ -55,4 +70,32 @@ export class MenuComponent implements OnInit {
     sessionStorage.removeItem(environment.sessionToken);
     this.router.navigateByUrl('');
   }
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  dataSource = ELEMENT_DATA;
+
+  setActiveTheme(theme: string, darkness: boolean = false) {
+    this.activeTheme = theme;
+    this.eventService.emitColorkEvent({
+      data: { theme: theme, darkness: darkness },
+    });
+  }
+
+  toggleDarkness() {
+    this.eventService.emitColorkEvent({
+      data: { theme: this.activeTheme, darkness: true },
+    });
+  }
 }
+
+export interface PeriodicElement {
+  name: string;
+  position: number;
+  weight: number;
+  symbol: string;
+}
+
+const ELEMENT_DATA: PeriodicElement[] = [
+  { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
+  { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
+  { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
+];

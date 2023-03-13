@@ -1,13 +1,6 @@
-@import "~@angular/material/theming";
-
-// always include only once per project
-@include mat-core();
-
+@use '@angular/material' as mat;
 // import our custom themes
 @import "theme.scss";
-
-@include angular-material-theme($my-theme);
-
 /* You can add global styles to this file, and also import other style files */
 
 html,
@@ -26,13 +19,12 @@ body {
 }
 
 mat-dialog-container {
-  background: whitesmoke !important;
+ // background: whitesmoke !important;
 }
 
 gridster-item {
-  border: 2px solid lightgray;
+ // border: 2px solid lightgray;
 }
-
 gridster-item .mat-card {
   padding: 0;
 }
