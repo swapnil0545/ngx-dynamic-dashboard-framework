@@ -1,21 +1,10 @@
-.more-button {
-  right: 10px;
+.elipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-mat-card-title {
-  //color: #3f51b5;
-}
-
-.move-cursor {
-  cursor: move;
-}
-
-.crm-dashboard-widget-toolbar-button {
-  min-width: 32px;
-  padding: 0 4px; // 16
-}
-
-.widget-header{
- // background-color: lightgrey;
-  padding: 10px 10px 0 10px;
+::ng-deep .widget-card .mat-mdc-card-header .mat-mdc-card-header-text {
+  /* CSS styles go here */
+  width: 75%; // for example to remove the margin
 }

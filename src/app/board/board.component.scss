@@ -20,34 +20,17 @@ h1 {
 
 .docs-primary-header {
   padding-left: 20px;
-
-  h3,h6 {
+  h3,
+  h6 {
     font-weight: 300;
+    margin: 0;
+    min-height: 25px;
+  }
+  h3 {
     margin: 5px;
   }
 }
 
-
-.sidenav-toggle {
-  padding: 0;
-  margin: 8px;
-  min-width: 64px;
-  display: none;
-
-  @media (max-width: constants.$small-breakpoint-width) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  mat-icon {
-    font-size: 30px;
-    height: 64px;
-    width: 64px;
-    line-height: 64px;
-    color: white;
-  }
-}
 .board-header-wrapper {
   margin: 10px 0 0 25px;
 }

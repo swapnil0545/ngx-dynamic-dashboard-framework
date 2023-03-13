@@ -127,7 +127,7 @@ export class BoardComponent implements OnInit {
       keepFixedHeightInMobile: true,
       useBodyForBreakpoint: true,
       setGridSize: true,
-      swap: false,
+      swap: true,
       pushItems: false,
     };
   }

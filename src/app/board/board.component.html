@@ -9,9 +9,6 @@
   *ngIf="boardExists"
   class="docs-primary-header component-page-header board-header"
 >
-  <button mat-button class="sidenav-toggle">
-    <mat-icon>menu</mat-icon>
-  </button>
   <div class="board-header-wrapper">
     <h3>
       {{ boardData.title }}
@@ -23,6 +20,8 @@
 <mat-tab-group
   [selectedIndex]="selected.value"
   (selectedIndexChange)="selected.setValue($event); setSelected(selected.value)"
+  mat-stretch-tabs="false"
+  mat-align-tabs="start"
 >
   <mat-tab
     *ngFor="let tab of boardData.tabs; let index = index"
