@@ -11,6 +11,8 @@ import { ConfigurationModule } from '../configuration/configuration.module';
 import { LibraryModule } from '../library/library.module';
 import { RbacDirective } from '../_authorization/rbac.directive';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
 @NgModule({
   declarations: [MenuComponent, RbacDirective],
   imports: [
@@ -25,6 +27,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
     ConfigurationModule,
     MatDialogModule,
     LibraryModule,
+    MatTooltipModule,
   ],
   exports: [MenuComponent],
   providers: [],

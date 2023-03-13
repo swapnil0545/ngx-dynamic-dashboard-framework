@@ -12,8 +12,9 @@
       mat-icon-button
       class="example-icon"
       aria-label="Example icon-button with menu icon"
+      (click)="toggleMenu()"
     >
-      <mat-icon (click)="toggleMenu()">menu</mat-icon>
+      <mat-icon>menu</mat-icon>
     </button>
   </span>
 
@@ -21,23 +22,23 @@
   <span class="example-spacer"></span>
 
   <span *checkPermissions>
-    <span class="menu-text"> Configure board</span>
     <button
       mat-icon-button
       (click)="openConfigDialog()"
       class="example-icon"
-      aria-label="Example icon-button with share icon"
+      aria-label="Configure board"
+      matTooltip="Configure the dashboard"
     >
       <mat-icon>settings</mat-icon>
     </button>
   </span>
 
   <span *checkPermissions>
-    <span class="menu-text">Add widget</span>
     <button
       mat-icon-button
       (click)="openGadgetLibraryDialog()"
-      aria-label="Example icon-button with heart icon"
+      aria-label="Add a widget"
+      matTooltip="Add a widget to the dashboard"
     >
       <mat-icon>playlist_add</mat-icon>
     </button>
@@ -89,16 +90,14 @@
     </mat-grid-list>
   </mat-menu>
   <span style="margin-left: 20px">
-    <span class="menu-text"> Log Out</span>
     <button
       mat-icon-button
       (click)="logout()"
       class="example-icon favorite-icon"
-      aria-label="Example icon-button with heart icon"
+      aria-label="Logout"
+      matTooltip="Logout"
     >
       <mat-icon>logout</mat-icon>
     </button>
   </span>
-
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </mat-toolbar>

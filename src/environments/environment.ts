@@ -12,7 +12,7 @@ export const environment = {
   sessionToken: 'API_KEY',
   useDBForBoardStorage: false,
   demo: true,
-  applicationTitle: 'NGX Dynamic Dashboard',
+  applicationTitle: 'Dynamic Dashboard',
 };
 
 /*

@@ -123,12 +123,12 @@ export class BoardComponent implements OnInit {
       maxCols: 10,
       minRows: 10,
       maxRows: 20,
-      pushItems: true,
       resizable: { enabled: true },
-      swap: true,
       keepFixedHeightInMobile: true,
       useBodyForBreakpoint: true,
       setGridSize: true,
+      swap: false,
+      pushItems: false,
     };
   }
   /**

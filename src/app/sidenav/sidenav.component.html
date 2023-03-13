@@ -1,6 +1,6 @@
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side">
-    <mat-selection-list #boardList [multiple]="false">
+    <mat-selection-list #boardList [multiple]="false" hideSingleSelectionIndicator>
       <mat-list-option
         *ngFor="let board of boardData"
         [value]="board.id"

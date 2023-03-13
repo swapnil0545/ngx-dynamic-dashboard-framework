@@ -1,10 +1,24 @@
-<mat-card *ngIf="boardExists" class="board-header">
+<!--<mat-card *ngIf="boardExists" class="board-header">
   <mat-card-title>{{ boardData.title }}</mat-card-title>
   <mat-card-subtitle></mat-card-subtitle>
   <mat-card-content>
     <p>{{ boardData.description }}</p>
   </mat-card-content>
-</mat-card>
+</mat-card>-->
+<header
+  *ngIf="boardExists"
+  class="docs-primary-header component-page-header board-header"
+>
+  <button mat-button class="sidenav-toggle">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <div class="board-header-wrapper">
+    <h3>
+      {{ boardData.title }}
+      <h5>{{ boardData.description }}</h5>
+    </h3>
+  </div>
+</header>
 
 <mat-tab-group
   [selectedIndex]="selected.value"

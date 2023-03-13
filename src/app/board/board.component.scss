@@ -1,8 +1,54 @@
+@use "../../styles/constants";
+
+.component-page-header {
+  display: flex;
+  align-items: center;
+
+  @media (max-width: constants.$small-breakpoint-width) {
+    padding-left: 0;
+  }
+}
+
+h1 {
+  outline: none;
+
+  @media (max-width: constants.$small-breakpoint-width) {
+    padding: 24px 8px;
+    font-size: 20px;
+  }
+}
+
+.sidenav-toggle {
+  padding: 0;
+  margin: 8px;
+  min-width: 64px;
+  display: none;
+
+  @media (max-width: constants.$small-breakpoint-width) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  mat-icon {
+    font-size: 30px;
+    height: 64px;
+    width: 64px;
+    line-height: 64px;
+    color: white;
+  }
+}
+.board-header-wrapper {
+  margin: 10px 0 0 25px;
+}
+
+//============old====
 $primary_color: #3f51b5;
 
 .board-header {
-  top: 10px;
-  margin: 0 25px 10px;
+  border: 2px solid #cbcbcb;
+  border-radius: 5px;
+  margin: 10px 50px 0 50px;
 }
 
 mat-tab-group {
@@ -16,66 +62,6 @@ mat-card-title {
 .mat-card-content-grid-container {
   display: grid;
   align-items: center;
-}
-p {
-  font-style: "Roboto";
-  size: 10px;
-  color: $primary_color;
-}
-
-.one_col {
-  display: grid;
-  grid-template-columns: 75%;
-  row-gap: 25px;
-  column-gap: 25px;
-  justify-content: center;
-  margin: 40px;
-  padding-left: 100px;
-  padding-right: 100px;
-}
-
-.two_col_equal {
-  display: grid;
-  grid-template-columns: 50% 50%;
-  row-gap: 25px;
-  column-gap: 25px;
-  justify-content: center;
-  margin: 10px;
-}
-
-.two_col_wide_narrow {
-  display: grid;
-  grid-template-columns: 70% 30%;
-  row-gap: 25px;
-  column-gap: 25px;
-  justify-content: center;
-  margin: 10px;
-}
-
-.two_col_narrow_wide {
-  display: grid;
-  grid-template-columns: 30% 70%;
-  row-gap: 25px;
-  column-gap: 25px;
-  justify-content: center;
-  margin: 10px;
-}
-
-.three_col_equal {
-  display: grid;
-  grid-template-columns: 33% 33% 33%;
-  row-gap: 25px;
-  column-gap: 25px;
-  justify-content: center;
-  margin: 10px;
-}
-
-.empty-column-placeholder {
-  border-color: rgb(202, 153, 248);
-  border-width: 2px;
-  border-style: dashed;
-  background-color: rgb(233, 227, 227);
-  min-height: 50vh;
 }
 
 .grid-instruction {
@@ -137,5 +123,3 @@ gridster {
   transform: translate3d(0, 0px, 0px) !important;
   z-index: 999 !important;
 }
-
-
