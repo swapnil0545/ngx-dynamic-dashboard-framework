@@ -6,37 +6,37 @@
   <mat-card-content *ngIf="!inConfig">
         <mat-form-field appearance="fill">
           <mat-label>Line Lead(s)</mat-label>
-          <mat-chip-list>
+          <mat-chip-listbox>
             <mat-chip color="accent" selected *ngFor="let lead of lineleads">{{lead}}</mat-chip>
-          </mat-chip-list>
+          </mat-chip-listbox>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
           <mat-label>Driver</mat-label>
-          <mat-chip-list>
+          <mat-chip-listbox>
             <mat-chip  selected color="primary">{{driver}}</mat-chip>
-          </mat-chip-list>
+          </mat-chip-listbox>
         </mat-form-field>
 
         <mat-form-field class="small-control" appearance="fill">
           <mat-label>Material Handler Qty</mat-label>
-          <mat-chip-list>
+          <mat-chip-listbox>
             <mat-chip>{{mcount}}</mat-chip>
-          </mat-chip-list>
+          </mat-chip-listbox>
         </mat-form-field>
 
         <mat-form-field class="small-control" appearance="fill">
           <mat-label>Personell Qty</mat-label>
-          <mat-chip-list>
+          <mat-chip-listbox>
             <mat-chip>{{pcount}}</mat-chip>
-          </mat-chip-list>
+          </mat-chip-listbox>
         </mat-form-field>
-        
+
         <mat-form-field appearance="fill">
           <mat-label>Break</mat-label>
-          <mat-chip-list>
+          <mat-chip-listbox>
             <mat-chip>{{lunch}}</mat-chip>
-          </mat-chip-list>
+          </mat-chip-listbox>
         </mat-form-field>
       <!--
   <mat-form-field class="example-full-width" appearance="fill">

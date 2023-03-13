@@ -1,6 +1,6 @@
 // Below codes should only be included ONCE in your application.
 
-@import '~@angular/material/theming';
+@import '@angular/material/theming';
 
 @include mat-core();
 
@@ -28,5 +28,5 @@ $themes-map: (
 );
 
 // Import the module and do the job:
-@import '~angular-material-dynamic-themes-eli/themes-core';
+@import 'angular-material-dynamic-themes-eli/themes-core';
 @include make-stylesheets($themes-map);

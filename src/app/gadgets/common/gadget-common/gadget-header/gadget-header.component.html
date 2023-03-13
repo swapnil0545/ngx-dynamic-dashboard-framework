@@ -6,20 +6,24 @@
   <mat-card-title>{{ title }}</mat-card-title>
   <mat-card-subtitle>{{ subtitle }}</mat-card-subtitle>
   <!--<mat-card-subtitle>{{description}}</mat-card-subtitle>-->
-  <mat-chip-list>
+  <mat-chip-listbox>
     <mat-chip selected color="accent" *ngIf="inConfig">
       You are in configuration mode</mat-chip
     >
-  </mat-chip-list>
+  </mat-chip-listbox>
   <div style="margin-left: auto">
     <button mat-button class="crm-dashboard-widget-toolbar-button">
       <mat-icon class="drag-handler">open_with</mat-icon>
     </button>
-<!--
+    <!--
     <button mat-button class="crm-dashboard-widget-toolbar-button">
       <mat-icon>settings</mat-icon>
     </button>-->
-    <button mat-icon-button class="crm-dashboard-widget-toolbar-button" (click)="toggleCardMaximize()">
+    <button
+      mat-icon-button
+      class="crm-dashboard-widget-toolbar-button"
+      (click)="toggleCardMaximize()"
+    >
       <mat-icon>{{ isMaximized ? "fullscreen_exit" : "fullscreen" }}</mat-icon>
     </button>
     <button
