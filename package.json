@@ -26,7 +26,6 @@
     "@clr/ui": "^15.0.2",
     "@swimlane/ngx-charts": "^20.1.2",
     "angular-gridster2": "^15.0.3",
-    "angular-material-dynamic-themes-eli": "^1.2.0",
     "ng-dynamic-component": "^10.6.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.5.0",

@@ -12,6 +12,7 @@ import { LibraryModule } from '../library/library.module';
 import { RbacDirective } from '../_authorization/rbac.directive';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { ThemePickerModule } from '../shared/theme-picker';
 
 @NgModule({
   declarations: [MenuComponent, RbacDirective],
@@ -28,6 +29,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatDialogModule,
     LibraryModule,
     MatTooltipModule,
+    ThemePickerModule,
   ],
   exports: [MenuComponent],
   providers: [],

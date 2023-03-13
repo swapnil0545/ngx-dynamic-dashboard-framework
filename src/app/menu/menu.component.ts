@@ -6,8 +6,6 @@ import { ConfigurationComponent } from '../configuration/configuration.component
 import { EventService } from '../eventservice/event.service';
 import { OverlayContainer } from '@angular/cdk/overlay';
 
-const THEME_DARKNESS_SUFFIX = `-dark`;
-
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -16,17 +14,6 @@ const THEME_DARKNESS_SUFFIX = `-dark`;
 export class MenuComponent implements OnInit {
   visible = true;
   applicationTitle: string;
-  @HostBinding('class')
-  activeThemeCssClass!: string;
-  isThemeDark = false;
-  activeTheme!: string;
-  themes: string[] = [
-    'deeppurple-amber',
-    'indigo-pink',
-    'pink-bluegrey',
-    'purple-green',
-  ];
-
   constructor(
     public dialog: MatDialog,
     private eventService: EventService,
@@ -72,19 +59,6 @@ export class MenuComponent implements OnInit {
   }
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = ELEMENT_DATA;
-
-  setActiveTheme(theme: string, darkness: boolean = false) {
-    this.activeTheme = theme;
-    this.eventService.emitColorkEvent({
-      data: { theme: theme, darkness: darkness },
-    });
-  }
-
-  toggleDarkness() {
-    this.eventService.emitColorkEvent({
-      data: { theme: this.activeTheme, darkness: true },
-    });
-  }
 }
 
 export interface PeriodicElement {
