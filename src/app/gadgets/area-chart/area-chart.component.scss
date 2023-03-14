@@ -5,3 +5,7 @@ mat-card-content {
 mat-card {
   margin-bottom: 10px;
 }
+
+::ng-deep .ngx-charts-outer{
+  margin-left: -20px;
+}
