@@ -39,6 +39,7 @@ export enum Hiearchy {
 export interface ITab {
   title: string;
   id: number;
+  order?: number;
 }
 
 export interface DashboardConfig extends GridsterConfig {}

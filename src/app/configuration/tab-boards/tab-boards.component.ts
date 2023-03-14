@@ -1,12 +1,12 @@
 import { DataSource } from '@angular/cdk/table';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
-import { Observable, ReplaySubject } from 'rxjs';
 import {
-  Hiearchy,
-  IBoard,
-  IBoardCollection,
-} from 'src/app/board/board.model';
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
+} from '@angular/forms';
+import { Observable, ReplaySubject } from 'rxjs';
+import { Hiearchy, IBoard, IBoardCollection } from 'src/app/board/board.model';
 import { BoardService } from 'src/app/board/board.service';
 import { EventService } from 'src/app/eventservice/event.service';
 
@@ -15,6 +15,7 @@ export interface IBoardNewRequestData {
   description: string;
   product: string;
   tabvalue: string;
+  relationship: Hiearchy;
 }
 
 const ELEMENT_DATA: IBoard[] = [];
@@ -24,9 +25,7 @@ const ELEMENT_DATA: IBoard[] = [];
   styleUrls: ['./tab-boards.component.scss'],
 })
 export class TabBoardsComponent implements OnInit {
-
   @Output() boardAddEvent: EventEmitter<string> = new EventEmitter<string>();
-
 
   form: UntypedFormGroup;
   boardTitle = new UntypedFormControl();
@@ -57,7 +56,7 @@ export class TabBoardsComponent implements OnInit {
     this.loadData();
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   setupEventListeners() {
     this.eventService
@@ -83,7 +82,6 @@ export class TabBoardsComponent implements OnInit {
   }
 
   loadData() {
-
     this.resetForm();
 
     this.boardService
@@ -127,11 +125,13 @@ export class TabBoardsComponent implements OnInit {
           let dropDownList: IBoard[] = [];
 
           list.forEach((board) => {
-
-            if (board.relationship === Hiearchy.PARENT && board.tabs.length == 1 && board.tabs[0].id == board.id) {
+            if (
+              board.relationship === Hiearchy.PARENT
+              // &&
+              //board.tabs[0].id == board.id
+            ) {
               dropDownList.push(board);
             }
-
           });
 
           this.dropDownListSelection = [...dropDownList];
@@ -141,32 +141,30 @@ export class TabBoardsComponent implements OnInit {
   }
 
   create() {
-    
     if (this.editMode) {
       this.update();
     } else {
-    
-    let boardNewRequestData: IBoardNewRequestData = {
-      title: this.boardTitle.value,
-      description: this.boardDescription.value,
-      product: '',
-      tabvalue: this.boardTabvalue.value,
-    };
+      let boardNewRequestData: IBoardNewRequestData = {
+        title: this.boardTitle.value,
+        description: this.boardDescription.value,
+        product: '',
+        tabvalue: this.boardTabvalue.value,
+        relationship:
+          this.boardTabvalue.value === null ? Hiearchy.PARENT : Hiearchy.CHILD, //NO selection means its a parent type of dashboard
+      };
 
-    this.eventService.emitBoardCreateRequestEvent({
-      data: boardNewRequestData,
-    });
-    
-    //TODO - start progress indicator
+      this.eventService.emitBoardCreateRequestEvent({
+        data: boardNewRequestData,
+      });
 
-    this.boardAddEvent.emit("");
+      //TODO - start progress indicator
 
-  }
+      this.boardAddEvent.emit('');
+    }
   }
 
   //TODO - edit
   edit(item: any) {
-
     this.boardTitle.setValue(item['title']);
     this.boardDescription.setValue(item['description']);
     this.editMode = true;
@@ -176,19 +174,16 @@ export class TabBoardsComponent implements OnInit {
   }
 
   update() {
+    this.eventService.emitBoardUpdateNameDescription({
+      data: {
+        id: this.selectedId,
+        title: this.boardTitle.value,
+        description: this.boardDescription.value,
+      },
+    });
 
-    this.eventService.emitBoardUpdateNameDescription(
-      {
-        data:
-        {
-          id: this.selectedId,
-          title: this.boardTitle.value,
-          description: this.boardDescription.value
-        }
-      });
-
-      this.editMode = false;
-      this.loadData();
+    this.editMode = false;
+    this.loadData();
   }
 
   delete(item: any) {
@@ -203,7 +198,6 @@ export class TabBoardsComponent implements OnInit {
   resetForm() {
     this.form.reset();
   }
-
 }
 
 class ExampleDataSource extends DataSource<IBoard> {
@@ -218,7 +212,7 @@ class ExampleDataSource extends DataSource<IBoard> {
     return this._dataStream;
   }
 
-  disconnect() { }
+  disconnect() {}
 
   setData(data: IBoard[]) {
     this._dataStream.next(data);

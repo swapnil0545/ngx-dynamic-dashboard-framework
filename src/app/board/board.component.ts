@@ -10,6 +10,7 @@ import {
   BoardType,
   DashboardConfig,
   DashboardItemComponentInterface,
+  Hiearchy,
   IBoard,
 } from './board.model';
 import { BoardService } from './board.service';
@@ -78,6 +79,7 @@ export class BoardComponent implements OnInit {
   }
 
   selected = new UntypedFormControl(0);
+  selectedIndex: number | undefined;
   tabtitle: string = '';
 
   setSelected(val: number) {
@@ -230,6 +232,13 @@ export class BoardComponent implements OnInit {
     //getBoardData
     this.boardService.getBoardById(boardId).subscribe((boardData: IBoard) => {
       this.prepareBoardAndShow(boardData);
+      //reset tab to 0
+      if (boardData.relationship === Hiearchy.PARENT) {
+        //setTimeout(() => {
+        this.selected.setValue(0);
+        //this.selectedIndex = 0;
+        //}, 0);
+      }
     });
   }
   /**

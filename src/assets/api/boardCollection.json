@@ -538,8 +538,8 @@
       "structure": "two_col_equal",
       "id": 1677745879586,
       "tabs": [
-        { "title": "Comparison Graph", "id": 1677745879586 },
-        { "title": "Data Usage", "id": "1677659259112" }
+        { "title": "Data Usage", "id": "1677659259112" },
+        { "title": "Comparison Graph", "id": 1677745879586 }
       ],
       "relationship": 1,
       "gadgets": [

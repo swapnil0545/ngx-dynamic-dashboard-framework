@@ -240,29 +240,47 @@ export class BoardService {
       newBoard.id = Date.now();
       newBoard.title = event.data['title'];
       newBoard.description = event.data['description'];
-      newBoard.relationship = Hiearchy.PARENT;
+      newBoard.relationship = event.data['relationship'];
 
-      let tabs: ITab[] = [];
-      tabs.push({ title: event.data['title'], id: newBoard.id });
-
-      if (event.data['tabvalue'] != null) {
-        let tabId = event.data['tabvalue'];
-        let idx = boardCollection.boardList.findIndex(
-          (board) => board.id == tabId
+      let tab: ITab = { title: event.data['title'], id: newBoard.id };
+      // find all tabs under that group and append the newly added tab.
+      if (
+        event.data['relationship'] == Hiearchy.CHILD &&
+        event.data['tabvalue'] != null
+      ) {
+        // update parent
+        let parentDashId = event.data['tabvalue'];
+        let parentIdx = boardCollection.boardList.findIndex(
+          (board) => board.id == parentDashId
         );
-        let childBoard = boardCollection.boardList[idx];
+        let parentBoard = boardCollection.boardList[parentIdx];
+        parentBoard.tabs.push(tab);
 
-        tabs.push({ title: childBoard.title, id: tabId });
+        // update newly added tab
+        //newBoard.tabs = parentBoard.tabs;
 
-        childBoard.relationship = Hiearchy.CHILD;
-        childBoard.tabs = tabs;
+        boardCollection.lastSelectedBoard = newBoard.id;
+
+        boardCollection.boardList = [...boardCollection.boardList, newBoard];
+
+        //update all childs
+        parentBoard.tabs.forEach((tab) => {
+          let childTabIdx = boardCollection.boardList.findIndex(
+            (board) => board.id == tab.id
+          );
+          if (childTabIdx && childTabIdx != -1) {
+            let childBoard = boardCollection.boardList[childTabIdx];
+            childBoard.tabs = parentBoard.tabs;
+          }
+        });
+      } else if (event.data['relationship'] == Hiearchy.PARENT) {
+        // update newly added tab
+        newBoard.tabs.length = 0;
+        newBoard.tabs.push(tab);
+        boardCollection.lastSelectedBoard = newBoard.id;
+
+        boardCollection.boardList = [...boardCollection.boardList, newBoard];
       }
-
-      newBoard.tabs = tabs;
-
-      boardCollection.lastSelectedBoard = newBoard.id;
-
-      boardCollection.boardList = [...boardCollection.boardList, newBoard];
 
       this.saveBoardCollectionToDestination(boardCollection);
 
@@ -427,15 +445,11 @@ export class BoardService {
 
   public getLineChartFromAPI() {
     const boardCollectionJson = 'commercial-revenue-linechart.json';
-    return this._http.get<any>(
-      '/assets/api/' + boardCollectionJson
-    );
+    return this._http.get<any>('/assets/api/' + boardCollectionJson);
   }
 
   public getBarChartFromAPI() {
     const boardCollectionJson = 'top-performing-audience.json';
-    return this._http.get<any>(
-      '/assets/api/' + boardCollectionJson
-    );
+    return this._http.get<any>('/assets/api/' + boardCollectionJson);
   }
 }
