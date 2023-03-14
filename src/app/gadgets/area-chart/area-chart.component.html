@@ -11,7 +11,11 @@
   >
   </app-gadget-header>
 
-  <mat-card-content *ngIf="!inConfig" class="widget-content no-drag">
+  <mat-card-content
+    #containerRef
+    *ngIf="!inConfig"
+    class="widget-content no-drag"
+  >
     <ngx-charts-area-chart
       [scheme]="colorScheme"
       [curve]="curveShape"
@@ -24,6 +28,7 @@
       [yAxisLabel]="yAxisLabel"
       [timeline]="timeline"
       [results]="multi"
+      [view]="[containerRef.offsetWidth - 20, containerRef.offsetHeight]"
     >
     </ngx-charts-area-chart>
   </mat-card-content>

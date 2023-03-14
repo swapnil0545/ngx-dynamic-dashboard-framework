@@ -11,7 +11,7 @@
   >
   </app-gadget-header>
 
-  <mat-card-content *ngIf="!inConfig" class="widget-content">
+  <mat-card-content #containerRef *ngIf="!inConfig" class="widget-content">
     <ngx-charts-bar-vertical
       [roundEdges]="false"
       [scheme]="colorScheme"
@@ -23,6 +23,7 @@
       [yAxis]="true"
       [gradient]="true"
       [rotateXAxisTicks]="true"
+      [view]="[containerRef.offsetWidth - 20, containerRef.offsetHeight]"
     >
     </ngx-charts-bar-vertical>
   </mat-card-content>
