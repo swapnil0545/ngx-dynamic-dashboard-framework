@@ -119,7 +119,7 @@ export class BoardComponent implements OnInit {
       enableEmptyCellContextMenu: false,
       enableEmptyCellDrop: true,
       enableEmptyCellDrag: false,
-      itemResizeCallback: BoardComponent.itemResize,
+      itemResizeCallback: this.itemResize.bind(this),
       itemChangeCallback: this.itemChange.bind(this),
       minCols: 8,
       maxCols: 10,
@@ -374,14 +374,14 @@ export class BoardComponent implements OnInit {
     // this.eventService.emitBoardGadgetPropertyResizeEvent();
   }
 
-  static itemResize(
+  public itemResize(
     item: GridsterItem,
     itemComponent: DashboardItemComponentInterface
   ) {
     console.info('itemResized', item, itemComponent);
 
     triggerWindowResize();
-    //this.eventService.emitBoardGadgetPropertyResizeEvent();
+   // this.eventService.emitBoardGadgetPropertyResizeEvent();
     // this.dashboardWidgetService.reflowWidgets();
   }
 
@@ -428,5 +428,9 @@ export class BoardComponent implements OnInit {
   }
 }
 function triggerWindowResize() {
-  window.dispatchEvent(new Event('resize')); // to reisize respective charts
+  setTimeout(() => {
+    window.dispatchEvent(new Event('resize')); // to reisize respective charts
+    // timeout is needed as charts takes proper dimensions from parent after the css is present on dom.
+  }, 500);
+
 }

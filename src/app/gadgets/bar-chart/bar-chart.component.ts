@@ -68,7 +68,11 @@ export class BarChartComponent extends GadgetBase implements OnInit {
 
   // hack to resize graph
   resize() {
-    this.saleData = [...this.saleData];
+
+    setTimeout(() => {
+      this.saleData = [...this.saleData];
+     // alert(1)
+    }, 2000);
   }
 
   toggleMaximize() {
