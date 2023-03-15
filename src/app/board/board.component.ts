@@ -431,6 +431,6 @@ function triggerWindowResize() {
   setTimeout(() => {
     window.dispatchEvent(new Event('resize')); // to reisize respective charts
     // timeout is needed as charts takes proper dimensions from parent after the css is present on dom.
-  }, 500);
+  }, 100);
 
 }
